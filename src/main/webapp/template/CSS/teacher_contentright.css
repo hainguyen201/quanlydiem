@@ -1,0 +1,11 @@
+.toolbar {
+    float: right;
+    top: 16px;
+    right: 103px;
+}
+
+.toolbar>button {
+    background-color: #1BBC9D;
+    border: none;
+    width: 70px;
+}

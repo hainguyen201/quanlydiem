@@ -1,0 +1,27 @@
+.main-table {
+    width: 96%;
+    margin: 0 18px;
+    top: 60px;
+    max-height: 500px;
+    overflow: scroll;
+    font-size: 14px;
+}
+
+.table {
+    background-color: #fff;
+}
+
+td {
+    overflow: hidden;
+}
+
+.table thead th {
+    text-align: center;
+    position: sticky;
+    top: -1px;
+    background-color: #D0D2CF;
+}
+
+.tick {
+    background-color: #ECECEC;
+}

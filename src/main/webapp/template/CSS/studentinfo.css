@@ -1,0 +1,27 @@
+.main-studentinfo {
+    position: relative;
+    top: 30px;
+    /* left: 30px; */
+    width: 100%;
+}
+
+.info {
+    width: 100%;
+    display: flex;
+}
+
+.info>div {
+    margin-left: 40px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.info div span {
+    display: inline-block;
+    width: 100px;
+    font-size: 20px;
+}
+
+.info div input {
+    width: 250px;
+}
