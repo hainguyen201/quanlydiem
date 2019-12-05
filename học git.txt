@@ -1,0 +1,9 @@
+1. commit to repository:
+	git commit -m "message for this commit"
+2. revert project
+	use: git log 
+	để xem toàn bộ thông tin của các lần commit
+	git revert [mã của lần commit thành công đó]
+3. push lên github
+	git remote add [tên project hay folder muốn push] [địa chỉ của repository trên git]
+	git push --set-upstream [tên project] master
