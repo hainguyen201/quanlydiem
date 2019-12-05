@@ -2,26 +2,19 @@ package quanlydiemsinhvien.model;
 
 import java.sql.Date;
 
-public class StudentModel {
-	private Long studentid;
-	private String studentname;
+public class StudentModel extends AbstractModel{
 	private String email;
 	private String faculty;
 	private String district;
 	private Date dateofbirth;
 	private String gender;
 	private String studentclass;
-	public Long getStudentid() {
-		return studentid;
+	private StudentGradeModel studentGradeModel;
+	public StudentGradeModel getStudentGradeModel() {
+		return studentGradeModel;
 	}
-	public void setStudentid(Long studentid) {
-		this.studentid = studentid;
-	}
-	public String getStudentname() {
-		return studentname;
-	}
-	public void setStudentname(String studentname) {
-		this.studentname = studentname;
+	public void setStudentGradeModel(StudentGradeModel studentGradeModel) {
+		this.studentGradeModel = studentGradeModel;
 	}
 	public String getEmail() {
 		return email;

@@ -18,6 +18,7 @@ public class StudentMapper implements RowMapper<StudentModel> {
 			student.setDistrict(resultSet.getString("district"));
 			student.setStudentclass(resultSet.getString("studentclass"));
 			student.setFaculty(resultSet.getString("faculty"));
+			student.setRoleid(resultSet.getLong("roleid"));
 			return student;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

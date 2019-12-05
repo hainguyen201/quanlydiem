@@ -1,6 +1,6 @@
 package quanlydiemsinhvien.model;
 
-public class StudentGradeModel {
+public class StudentGradeModel extends AbstractModel{
 	private String semester;
 	private String subjectid;
 	private String subjectname;

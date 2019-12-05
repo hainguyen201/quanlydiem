@@ -6,4 +6,5 @@ import quanlydiemsinhvien.model.StudentModel;
 
 public interface IStudentDAO {
 	List<StudentModel> getall();
+	StudentModel findbynameandpassword(String username, String password);
 }

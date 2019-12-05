@@ -24,5 +24,9 @@ public class StudentService implements IStudentService{
 		// TODO Auto-generated method stub
 		return studentGradeDao.getAllGradeByStudentId(studentid);
 	}
+	@Override
+	public StudentModel findbynameandpassword(String username, String password) {
+		return studentDao.findbynameandpassword(username, password);
+	}
 
 }

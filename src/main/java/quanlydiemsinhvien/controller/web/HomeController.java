@@ -2,6 +2,7 @@ package quanlydiemsinhvien.controller.web;
 
 import java.io.IOException;
 
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,14 +10,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = { "/trang-chu" })
+import quanlydiemsinhvien.model.StudentModel;
+import quanlydiemsinhvien.model.TeacherModel;
+import quanlydiemsinhvien.service.IStudentService;
+import quanlydiemsinhvien.service.ITeacherService;
+import quanlydiemsinhvien.utils.FormUtil;
+import quanlydiemsinhvien.utils.SessionUtil;
+
+@WebServlet(urlPatterns = { "/trang-chu", "/dang-nhap", "/thoat" })
 public class HomeController extends HttpServlet {
 	/**
 	 * 
 	 */
-	/*
-	 * @Inject private IStudentService studentService;
-	 */
+
+	@Inject
+	private IStudentService studentService;
+	@Inject
+	private ITeacherService teacherService;
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -33,8 +43,57 @@ public class HomeController extends HttpServlet {
 		 * studentService.getall(); mapper.writeValue(response.getOutputStream(),
 		 * studentModel);
 		 */
-		RequestDispatcher rd = request.getRequestDispatcher("views/web/home.jsp");
-		rd.forward(request, response);
+
+		String status = request.getParameter("action");
+		if (status.equals("login")) {
+			RequestDispatcher rd = request.getRequestDispatcher("views/login.jsp");
+			rd.forward(request, response);
+		} else {
+			response.sendRedirect(request.getContextPath() +"/student-view");
+		}
+
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		String action = request.getParameter("action");
+		String usertype=request.getParameter("usertype");
+		StudentModel studentModel=new StudentModel();
+		TeacherModel teacherModel=new TeacherModel();
+		if (action != null && action.equals("login")) {
+			/* StudentModel model = FormUtil.toModel(StudentModel.class, request); */
+			if(usertype.equals("student"))
+			{
+				studentModel = studentService.findbynameandpassword(request.getParameter("username"),
+						request.getParameter("password"));
+				
+			}else {
+				teacherModel = teacherService.findbynameandpassword(request.getParameter("username"),
+						request.getParameter("password"));
+			}
+			if (teacherModel != null) {
+				System.out.println("đăng nhập thành công");
+				SessionUtil.getInstance().putValue(request, "USERMODEL", teacherModel);
+				// kiểm tra là user
+
+				if (teacherModel.getRoleid() == 2) {
+					response.sendRedirect(request.getContextPath() + "/trang-chu?action=success");
+
+				} else // kiểm tra là admin else if (model.getRole().getCode().equals("ADMIN"))
+				{
+					response.sendRedirect(request.getContextPath() + "/admin-home");
+				}
+
+			} else {
+				// nếu không tồn tại tài khoản nào thì chuyển tới trang đang nhập
+				// hàm getContextPath sẽ lấy trả về
+				// http://localhost:8080/new-jdbc-17-October-2019
+				response.sendRedirect(request.getContextPath() + "/dang-nhap?action=login");
+			}
+
+		}
 
 	}
 

@@ -2,6 +2,7 @@ package quanlydiemsinhvien.controller.web;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -11,6 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.HTTP;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,7 +25,7 @@ import quanlydiemsinhvien.model.StudentModel;
 import quanlydiemsinhvien.service.IStudentService;
 import quanlydiemsinhvien.utils.HttpUtil;
 
-@WebServlet("/student" )
+@WebServlet("/student")
 public class StudentGradeapi extends HttpServlet {
 	/**
 	 * 
@@ -32,7 +37,7 @@ public class StudentGradeapi extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		// TODO Auto-generated method stub
 
 		ObjectMapper mapper = new ObjectMapper();
@@ -41,11 +46,38 @@ public class StudentGradeapi extends HttpServlet {
 		// khi server gửi về phải định nghĩa kiểu json
 		response.setContentType("application/json");
 		// chuyển từ String json về Model
-		Long studentid=(long) 20173089;
-		HttpUtil h=HttpUtil.of(request.getReader());
-		String s=h.getValue();
+		Long studentid = (long) 20173089;
+		/*
+		 * StudentModel studentModel1=
+		 * HttpUtil.of(request.getReader()).toModel(StudentModel.class);
+		 */
 		List<StudentModel> studentModel = studentService.getall();
-		List<StudentGradeModel> studentGradeModels=studentService.getStudentGradeById(studentid);	
-		mapper.writeValue(response.getOutputStream(),studentGradeModels.get(0));	
+		/*
+		 * List<StudentGradeModel>
+		 * studentGradeModels=studentService.getStudentGradeById(studentModel1.
+		 * getStudentid());
+		 */
+		mapper.writeValue(response.getOutputStream(), studentModel);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		// khi client gửi lên tiếng việt màkhông bị lỗi font
+		request.setCharacterEncoding("UTF-8");
+		// khi server gửi về phải định nghĩa kiểu json
+		response.setContentType("application/json");
+		// chuyển từ String json về Model
+		/*
+		 * StringBuffer jb = new StringBuffer(); String line = null; try {
+		 * BufferedReader reader = request.getReader(); while ((line =
+		 * reader.readLine()) != null) jb.append(line); } catch (Exception e) { report
+		 * an error }
+		 * 
+		 * try { JSONObject jsonObject = HTTP.toJSONObject(jb.toString()); } catch
+		 * (JSONException e) { // crash and burn throw new
+		 * IOException("Error parsing JSON request string"); }
+		 */
 	}
 }

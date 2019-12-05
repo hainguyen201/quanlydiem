@@ -48,7 +48,7 @@ public class HttpUtil {
 			e.printStackTrace();
 		}
 		
-		
+		String s=sb.toString();
 		return new HttpUtil(sb.toString());
 	}
 }
