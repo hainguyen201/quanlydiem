@@ -18,7 +18,14 @@ public class StudentDAO extends AbstractDAO<StudentModel> implements IStudentDAO
 	public StudentModel findbynameandpassword(String username, String password) {
 		StringBuilder sql= new StringBuilder("select * from student s inner join userrole r on"
 				+ " s.studentid=r.userid where username='"+username+"' and password='"+password+"'");
-		return query(sql.toString(), new StudentMapper()).get(0);
+		List<StudentModel> studentModels=query(sql.toString(), new StudentMapper());
+		if(studentModels.isEmpty()) {
+			StudentModel studentModel=new StudentModel();
+			studentModel.setMessage("error");
+			return studentModel;
+		}else {
+			return studentModels.get(0);
+		}
 	}
 	
 	

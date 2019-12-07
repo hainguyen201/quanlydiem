@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Trang Admin</title>
 </head>
 <body>
 <header class="header">
@@ -12,7 +12,7 @@
 		<a href="#" class="logo_uni_header"></a>
 	</div>
 	<div class="login">
-		<button class="link-login">Đăng xuất</button>
+		<button class="link-login"><a href="/quanlydiemsinhvien/thoat?action=logout&usertype=teacher">Đăng xuất</button>
 	</div>
 	</header>
 	<div class="master-content">

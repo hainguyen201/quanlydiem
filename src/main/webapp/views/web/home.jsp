@@ -5,16 +5,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Sinh viên</title>
 </head>
 <body>
-<header class="header">
-	<div class="logo_uni">
-		<a href="#" class="logo_uni_header"></a>
-	</div>
-	<div class="login">
-		<button class="link-login">Đăng xuất</button>
-	</div>
+	<header class="header">
+		<div class="logo_uni">
+			<a href="#" class="logo_uni_header"></a>
+		</div>
+		<div class="login">
+			<button class="link-login"><a href="/quanlydiemsinhvien/thoat?action=logout&usertype=student">Đăng xuất</a></button>
+		</div>
 	</header>
 	<div class="master-content">
 		<div id="dialog" hidden>
@@ -66,34 +66,43 @@
 				<div class="main-studentinfo">
 					<div class="info">
 						<div class="name">
-							<span>Họ tên</span> <input fieldname='studentname' />
+							<span>Họ tên</span> <input fieldname='studentname'
+								value="${studentModel.studentname}" />
 						</div>
 						<div class="mssv">
-							<span>MSSV</span> <input fieldname="studentid" />
+							<span>MSSV</span> <input fieldname="studentid"
+								value="${studentModel.studentid }" />
 						</div>
 					</div>
 					<div class="info">
 						<div class="class">
-							<span>Lớp</span> <input fieldname="studentclass" />
+							<span>Lớp</span> <input fieldname="studentclass"
+								value="${studentModel.studentclass}" />
 						</div>
 						<div class="gender">
-							<span>Giới tính</span> <input fieldname="gender" />
+							<span>Giới tính</span> <input fieldname="gender"
+								value="${studentModel.gender}" />
 						</div>
 					</div>
 					<div class="info">
 						<div class="faculty">
-							<span>Khoa, viện</span><input fieldname="faculty"/>
-						</div>						
+							<span>Khoa, viện</span><input
+								style="position: relative; left: 5px" fieldname="faculty"
+								value="${studentModel.faculty}" />
+						</div>
 						<div class="dob">
-							<span>Ngày sinh</span> <input fieldname="dateofbirth" />
+							<span>Ngày sinh</span> <input fieldname="dateofbirth"
+								value="${studentModel.dateofbirth}" />
 						</div>
 					</div>
 					<div class="info">
 						<div class="email">
-							<span>Email</span> <input fieldname="email" />
+							<span>Email</span> <input fieldname="email"
+								value="${studentModel.email}" />
 						</div>
 						<div class="district">
-							<span>Tỉnh,TP</span> <input fieldname="district" />
+							<span>Tỉnh,TP</span> <input fieldname="district"
+								value="${studentModel.district}" />
 						</div>
 					</div>
 				</div>
@@ -112,7 +121,6 @@
 							</tr>
 						</thead>
 						<tbody>
-
 						</tbody>
 					</table>
 				</div>
@@ -133,7 +141,17 @@
 		src="<c:url value='/template/Scrips/libraries/jquery-1.12.4.js'/>"></script>
 	<script src="<c:url value='/template/Scrips/libraries/jquery-ui.js'/>"></script>
 	<script src="<c:url value='/template/Scrips/libraries/common.js'/>"></script>
-	<script src="<c:url value='/template/Scrips/view/login.js'/>"></script>
 	<script src="<c:url value='/template/Scrips/view/student.js'/>"></script>
+	<script type="text/javascript">
+		$('.info input').prop("disabled", true);
+		var date = new Date($.now());
+        var res = date.getMonth();
+        if (res == 12) {
+            res = 1;
+        } else {
+            res++;
+        }
+        $('#datenow').val(date.getDate() + '/' + res + '/' + date.getFullYear());
+	</script>
 </body>
 </html>

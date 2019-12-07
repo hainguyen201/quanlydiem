@@ -37,9 +37,7 @@ public class Studentapi extends HttpServlet {
 		// khi server gửi về phải định nghĩa kiểu json
 		response.setContentType("application/json");
 		// chuyển từ String json về Model
-		Long studentid=new Long(20173089);
-		List<StudentGradeModel> studentModel = studentService.getStudentGradeById(studentid);
-		mapper.writeValue(response.getOutputStream(), studentModel);
+		
 		
 	}
 

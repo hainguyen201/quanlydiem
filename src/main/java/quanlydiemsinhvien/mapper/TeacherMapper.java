@@ -15,7 +15,7 @@ public class TeacherMapper implements RowMapper<TeacherModel>{
 			teacher.setTeachername(resultSet.getString("teachername"));
 			teacher.setSubjectid(resultSet.getString("subjectid"));
 			teacher.setRoleid(resultSet.getLong("roleid"));
-		
+			teacher.setMessage("success");
 			return teacher;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

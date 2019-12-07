@@ -1,5 +1,7 @@
 package quanlydiemsinhvien.dao.imp;
 
+import java.util.List;
+
 import quanlydiemsinhvien.dao.ITeacherDAO;
 import quanlydiemsinhvien.mapper.TeacherMapper;
 import quanlydiemsinhvien.model.TeacherModel;
@@ -18,6 +20,11 @@ public class TeacherDAO extends AbstractDAO<TeacherModel> implements ITeacherDAO
 				"on t.teacherid=u.userid\r\n" + 
 				"where username= '" +username+ 
 				"' and password='"+password+"'");
-		return query(sql.toString(), new TeacherMapper()).get(0);
+		List<TeacherModel> teacherModels=query(sql.toString(), new TeacherMapper());
+		if(teacherModels.isEmpty()) {
+			TeacherModel teacherModel=new TeacherModel();
+			teacherModel.setMessage("error");
+		}
+		return teacherModels.get(0);
 	}
 }

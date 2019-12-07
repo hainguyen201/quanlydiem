@@ -1,12 +1,12 @@
 $(document).ready(function() {
-
+	$('.info input').prop("disabled", true);
 });
 class student {
     constructor() {
 
-        this.loadData();
+        /*this.loadData();*/
         this.inItEvent();
-
+        this.getDateNow();
 
     }
     inItEvent() {
@@ -54,5 +54,17 @@ class student {
         $('.main-table tbody').empty();
 
     }
+    getDateNow() {
+        var date = new Date($.now());
+        var res = date.getMonth();
+        if (res == 12) {
+            res = 1;
+        } else {
+            res++;
+        }
+        $('#datenow').val(date.getDate() + '/' + res + '/' + date.getFullYear());
+
+    }
+
 }
 var students = new student();

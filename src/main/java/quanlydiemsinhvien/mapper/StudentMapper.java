@@ -8,8 +8,9 @@ public class StudentMapper implements RowMapper<StudentModel> {
 
 	@Override
 	public StudentModel mapRow(ResultSet resultSet) {
+		StudentModel student = new StudentModel();
 		try {
-			StudentModel student = new StudentModel();
+			
 			student.setStudentid(resultSet.getLong("studentid"));
 			student.setStudentname(resultSet.getString("studentname"));
 			student.setEmail(resultSet.getString("email"));
@@ -19,6 +20,7 @@ public class StudentMapper implements RowMapper<StudentModel> {
 			student.setStudentclass(resultSet.getString("studentclass"));
 			student.setFaculty(resultSet.getString("faculty"));
 			student.setRoleid(resultSet.getLong("roleid"));
+			student.setMessage("success");
 			return student;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

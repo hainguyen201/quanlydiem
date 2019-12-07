@@ -1,8 +1,6 @@
 package quanlydiemsinhvien.controller.web;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -12,18 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.HTTP;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import quanlydiemsinhvien.model.StudentGradeModel;
 import quanlydiemsinhvien.model.StudentModel;
 import quanlydiemsinhvien.service.IStudentService;
-import quanlydiemsinhvien.utils.HttpUtil;
 
 @WebServlet("/student")
 public class StudentGradeapi extends HttpServlet {
@@ -46,18 +36,20 @@ public class StudentGradeapi extends HttpServlet {
 		// khi server gửi về phải định nghĩa kiểu json
 		response.setContentType("application/json");
 		// chuyển từ String json về Model
-		Long studentid = (long) 20173089;
 		/*
+		 * Long studentid = (long) 20173089;
+		 * 
 		 * StudentModel studentModel1=
 		 * HttpUtil.of(request.getReader()).toModel(StudentModel.class);
-		 */
-		List<StudentModel> studentModel = studentService.getall();
-		/*
+		 * 
+		 * List<StudentModel> studentModel = studentService.getall();
+		 * 
 		 * List<StudentGradeModel>
 		 * studentGradeModels=studentService.getStudentGradeById(studentModel1.
 		 * getStudentid());
+		 * 
+		 * mapper.writeValue(response.getOutputStream(), studentModel);
 		 */
-		mapper.writeValue(response.getOutputStream(), studentModel);
 	}
 
 	@Override

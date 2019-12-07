@@ -9,6 +9,14 @@ public class AbstractModel {
 	private String password;
 	private Long roleid;
 	private String rolename;
+	private String message;
+	
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
 	public Long getStudentid() {
 		return studentid;
 	}

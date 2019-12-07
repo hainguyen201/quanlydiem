@@ -1,11 +1,5 @@
 $(document).ready(function() {
-    // $("#dialog").dialog({
-    //     title: "Dang nhap",
-    //     modal: true,
-    //     height: 400,
-    //     width: 500,
-    //     resizable: false,
-    // });
+
     var date = new Date($.now());
     var res = date.getMonth();
     if (res == 12) {
@@ -18,13 +12,11 @@ $(document).ready(function() {
 });
 class login {
     constructor() {
+        this.getdatenow();
         this.InItEvent();
-        this.loaddata();
-
+        this.checktype();
     }
     InItEvent() {
-
-
         $(document).on('click', '.link-login', this.openLoginDialog);
     }
     openLoginDialog() {
@@ -38,9 +30,22 @@ class login {
             resizable: false,
         });
     }
+    checktype() {
+        $('.login-type').change(function() {
+            var s = $("input[name='type']:checked").val();
+            $('input#usertype').val(s);
+        });
+    }
+    getdatenow() {
+        var date = new Date($.now());
+        var res = date.getMonth();
+        if (res == 12) {
+            res = 1;
+        } else {
+            res++;
+        }
+        $('#datenow').val(date.getDate() + '/' + res + '/' + date.getFullYear());
 
-    openPageQLDiem() {
-        window.location.replace("");
     }
 
 }
