@@ -24,6 +24,7 @@ public class TeacherDAO extends AbstractDAO<TeacherModel> implements ITeacherDAO
 		if(teacherModels.isEmpty()) {
 			TeacherModel teacherModel=new TeacherModel();
 			teacherModel.setMessage("error");
+			return teacherModel;
 		}
 		return teacherModels.get(0);
 	}
