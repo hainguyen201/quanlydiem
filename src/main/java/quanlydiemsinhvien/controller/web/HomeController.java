@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import quanlydiemsinhvien.model.TeacherModel;
 import quanlydiemsinhvien.service.IStudentService;
 import quanlydiemsinhvien.service.ITeacherService;
 import quanlydiemsinhvien.utils.SessionUtil;

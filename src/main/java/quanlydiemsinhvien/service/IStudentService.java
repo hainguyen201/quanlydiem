@@ -9,6 +9,5 @@ import quanlydiemsinhvien.model.TeacherModel;
 public interface IStudentService {
 	List<StudentModel> getall();
 	List<StudentGradeModel> getStudentGradeById(Long studentid);
-	StudentModel findbynameandpassword(String username, String password);
-	
+	StudentModel findbynameandpassword(String username, String password);	
 }

@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import quanlydiemsinhvien.model.StudentModel;
+import quanlydiemsinhvien.model.StudentGradeModel;
 import quanlydiemsinhvien.service.IStudentService;
 
-@WebServlet("/student")
+@WebServlet(urlPatterns = {"/student"})
 public class StudentGradeapi extends HttpServlet {
 	/**
 	 * 
@@ -60,6 +60,13 @@ public class StudentGradeapi extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		// khi server gửi về phải định nghĩa kiểu json
 		response.setContentType("application/json");
+		String id=request.getParameter("studentid");
+		if(id!=null) {
+			Long studentid=new Long(Long.parseLong(id));
+			List<StudentGradeModel> studentGradeModels= studentService.getStudentGradeById(studentid);
+			mapper.writeValue(response.getOutputStream(), studentGradeModels);
+		}
+		
 		// chuyển từ String json về Model
 		/*
 		 * StringBuffer jb = new StringBuffer(); String line = null; try {

@@ -110,14 +110,14 @@
 					<table class="table table-hover table-bordered table-responsive-sm">
 						<thead>
 							<tr>
-								<th>Kỳ học</th>
-								<th>Mã HP</th>
-								<th>Tên HP</th>
-								<th>TC</th>
-								<th>Lớp học</th>
-								<th>Điểm quá trình</th>
-								<th>Điểm thi</th>
-								<th>Kết quả</th>
+								<th fieldname="semester">Kỳ học</th>
+								<th fieldname="subjectid">Mã HP</th>
+								<th fieldname="subjectname">Tên HP</th>
+								<th fieldname="credit">TC</th>
+								<th fieldname="classid">Lớp học</th>
+								<th fieldname="grade1">Điểm quá trình</th>
+								<th fieldname="grade2">Điểm thi</th>
+								<th fieldname="result">Kết quả</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -135,13 +135,13 @@
 		</div>
 
 	</div>
-	<script
+<%-- 	<script
 		src="<c:url value='/template/Scrips/libraries/jquery-3.4.1.js'/>"></script>
 	<script
 		src="<c:url value='/template/Scrips/libraries/jquery-1.12.4.js'/>"></script>
 	<script src="<c:url value='/template/Scrips/libraries/jquery-ui.js'/>"></script>
 	<script src="<c:url value='/template/Scrips/libraries/common.js'/>"></script>
-	<script src="<c:url value='/template/Scrips/view/student.js'/>"></script>
+	<script src="<c:url value='/template/Scrips/view/student.js'/>"></script> --%>
 	<script type="text/javascript">
 		$('.info input').prop("disabled", true);
 		var date = new Date($.now());
@@ -152,6 +152,21 @@
             res++;
         }
         $('#datenow').val(date.getDate() + '/' + res + '/' + date.getFullYear());
+        /* var data = [];
+        data['studentid'] = 20173089;
+        $.ajax({
+            url: "student?studentid=" + 20173089,
+            type: 'post',
+            contentType: "application/json",
+            data: JSON.stringify(),
+            async: false,
+            dataType: 'json',
+            success: function(response) {
+                data = response;
+                debugger
+            }
+        }); */
 	</script>
+	
 </body>
 </html>

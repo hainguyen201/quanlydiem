@@ -22,9 +22,16 @@
 	href="<c:url value='/template/CSS/studentinfo.css'/>">
 <link rel="stylesheet" type="text/css" media="all"
 	href="<c:url value='/template/CSS/table.css'/>">
+
 </head>
 <body>
 	<dec:body />
 </body>
-
+<script
+	src="<c:url value='/template/Scrips/libraries/jquery-3.4.1.js'/>"></script>
+<script
+	src="<c:url value='/template/Scrips/libraries/jquery-1.12.4.js'/>"></script>
+<script src="<c:url value='/template/Scrips/libraries/jquery-ui.js'/>"></script>
+<script src="<c:url value='/template/Scrips/libraries/common.js'/>"></script>
+<script src="<c:url value='/template/Scrips/view/student.js'/>"></script>
 </html>

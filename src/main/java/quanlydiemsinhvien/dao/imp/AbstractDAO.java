@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +67,51 @@ public class AbstractDAO<T> implements GenericDAO<T> {
 			}
 		}
 	}
+
+	public boolean insert(String sql, Object... parameters) {
+
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		Connection connection = null;
+		try {
+			connection = getConnection();
+			connection.setAutoCommit(false);
+			statement = connection.prepareStatement(sql);
+			// thêm RETURN_GENERATED_KEYS để thực hiện hàm getGeneratedKeys
+			setParameter(statement, parameters);
+			statement.executeUpdate();
+			resultSet = statement.executeQuery();// getGeneratedKeys lấy giá trị key được tự tạo ra
+			connection.commit();// nếu k có commit thì sẽ không thay đổi db
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			if (connection != null) {
+				try {
+					connection.rollback();// nếu 1 tác vụ fail thì roll back lại
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+
+			}
+			return false;
+		} finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+				if (statement != null) {
+					statement.close();
+				}
+				if (resultSet != null) {
+					resultSet.close();
+				}
+			} catch (Exception e2) {
+				return false;
+			}
+		}
+
+	}
+
 	private void setParameter(PreparedStatement statement, Object... parameters) {
 		try {
 			for (int i = 0; i < parameters.length; i++) {
@@ -75,21 +121,22 @@ public class AbstractDAO<T> implements GenericDAO<T> {
 					statement.setLong(index, (Long) parameter);
 				} else if (parameter instanceof String) {
 					statement.setString(index, (String) parameter);
-				}else if( parameter instanceof Integer) {
-					statement.setInt(index, (Integer)parameter);
-				}else if( parameter instanceof Date) {
-					statement.setDate(index, (Date)parameter);
-				}else if(parameter instanceof Double) {
-					statement.setDouble(index, (Double)parameter);
-				}//nên có thêm trường hợp parameter=null
-				else if(parameter ==null) {
+				} else if (parameter instanceof Integer) {
+					statement.setInt(index, (Integer) parameter);
+				} else if (parameter instanceof Date) {
+					statement.setDate(index, (Date) parameter);
+				} else if (parameter instanceof Double) {
+					statement.setDouble(index, (Double) parameter);
+				} // nên có thêm trường hợp parameter=null
+				else if (parameter == null) {
 					statement.setNull(index, Types.NULL);
+				}else if(parameter instanceof Float) {
+					statement.setFloat(index, (Float) parameter);
 				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-
 
 }

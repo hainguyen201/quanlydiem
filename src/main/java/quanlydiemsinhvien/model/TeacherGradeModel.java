@@ -1,6 +1,6 @@
 package quanlydiemsinhvien.model;
 
-public class StudentGradeModel extends AbstractModel{
+public class TeacherGradeModel extends AbstractModel{
 	private String semester;
 	private String subjectid;
 	private String subjectname;
@@ -9,13 +9,7 @@ public class StudentGradeModel extends AbstractModel{
 	private float grade1;
 	private float grade2;
 	private String note;
-	
-	public String getNote() {
-		return note;
-	}
-	public void setNote(String note) {
-		this.note = note;
-	}
+	private float weight;
 	public String getSemester() {
 		return semester;
 	}
@@ -58,4 +52,17 @@ public class StudentGradeModel extends AbstractModel{
 	public void setGrade2(float grade2) {
 		this.grade2 = grade2;
 	}
+	public String getNote() {
+		return note;
+	}
+	public void setNote(String note) {
+		this.note = note;
+	}
+	public float getWeight() {
+		return weight;
+	}
+	public void setWeight(float weight) {
+		this.weight = weight;
+	}
+	
 }

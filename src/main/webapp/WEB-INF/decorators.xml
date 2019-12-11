@@ -11,6 +11,10 @@
 	</decorator>
 	
 	<decorator name="web" page="web.jsp">
+		<pattern>/student*</pattern>
+	</decorator>
+	<decorator name="login" page="login.jsp">
 		<pattern>/*</pattern>
 	</decorator>
+		
 </decorators>

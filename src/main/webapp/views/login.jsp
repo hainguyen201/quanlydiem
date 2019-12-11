@@ -5,12 +5,6 @@
 
 <head>
 <meta charset="utf-8">
-
-<link rel="stylesheet"
-	href="<c:url value='/template/CSS/libraries/jquery-ui.css'/>">
-<link rel="stylesheet" href="<c:url value='/template/CSS/header.css'/>">
-
-
 </head>
 
 <body>
@@ -94,11 +88,7 @@
 		});
 	</script>
 
-	<%-- <script type="text/javascript" src='<c:url value="/template/Scrips/libraries/jquery-3.4.1.js"/>'></script>
-    <script type="text/javascript" src='<c:url value="/template/Scrips/libraries/jquery-1.12.4.js"/>'></script>
-    <script type="text/javascript" src='<c:url value="/template/Scrips/libraries/jquery-ui.js"/>'></script>
-    <script type="text/javascript" src='<c:url value="/template/Scrips/view/login.js"/>'></script>
-    <script type="text/javascript" src='<c:url value="/template/Scrips/view/test.js"/>'></script> --%>
+	
 </body>
 
 </html>

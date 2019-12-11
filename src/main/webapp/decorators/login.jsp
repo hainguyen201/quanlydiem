@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-<title><dec:title default="Trang Giao vien" /></title>
+<title><dec:title default="Trang chu" /></title>
 <link rel="stylesheet" type="text/css" media="all"
 	href="<c:url value='/template/CSS/libraries/bootstrap-4.3.1-dist/css/bootstrap.css'/>">
 <link rel="stylesheet" type="text/css" media="all"
@@ -22,21 +22,16 @@
 	href="<c:url value='/template/CSS/studentinfo.css'/>">
 <link rel="stylesheet" type="text/css" media="all"
 	href="<c:url value='/template/CSS/table.css'/>">
-<link rel="stylesheet" type="text/css" media="all"
-	href="<c:url value='/template/CSS/teacher_contentright.css'/>">
-<link rel="stylesheet" type="text/css" media="all"
-	href="<c:url value='/template/CSS/dialog.css'/>">
+
 </head>
 <body>
 	<dec:body />
-	<script
-		src="<c:url value='/template/Scrips/libraries/jquery-3.4.1.js'/>"></script>
-	<script
-		src="<c:url value='/template/Scrips/libraries/jquery-1.12.4.js'/>"></script>
-	<script src="<c:url value='/template/Scrips/libraries/jquery-ui.js'/>"></script>
-	<script src="<c:url value='/template/Scrips/libraries/common.js'/>"></script>
-	<script src="<c:url value='/template/Scrips/view/teacher.js'/>"></script>
-	
 </body>
-
+<script
+	src="<c:url value='/template/Scrips/libraries/jquery-3.4.1.js'/>"></script>
+<script
+	src="<c:url value='/template/Scrips/libraries/jquery-1.12.4.js'/>"></script>
+<script src="<c:url value='/template/Scrips/libraries/jquery-ui.js'/>"></script>
+<script src="<c:url value='/template/Scrips/libraries/common.js'/>"></script>
+<script src="<c:url value='/template/Scrips/view/login.js'/>"></script>
 </html>

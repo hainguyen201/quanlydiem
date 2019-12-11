@@ -3,7 +3,9 @@ package quanlydiemsinhvien.dao.imp;
 import java.util.List;
 
 import quanlydiemsinhvien.dao.ITeacherDAO;
+import quanlydiemsinhvien.mapper.TeacherGradeMapper;
 import quanlydiemsinhvien.mapper.TeacherMapper;
+import quanlydiemsinhvien.model.TeacherGradeModel;
 import quanlydiemsinhvien.model.TeacherModel;
 
 public class TeacherDAO extends AbstractDAO<TeacherModel> implements ITeacherDAO {
@@ -28,4 +30,6 @@ public class TeacherDAO extends AbstractDAO<TeacherModel> implements ITeacherDAO
 		}
 		return teacherModels.get(0);
 	}
+
+	
 }

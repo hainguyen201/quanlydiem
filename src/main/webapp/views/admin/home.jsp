@@ -2,14 +2,11 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
-<title>Trang Admin</title>
-<link rel="stylesheet" type="text/css" media="all"
-	href="<c:url value='/template/CSS/teacher_contentright.css'/>">
-<link rel="stylesheet" type="text/css" media="all"
-	href="<c:url value='/template/CSS/dialog.css'/>">
 </head>
+
 <body>
 	<header class="header">
 		<div class="logo_uni">
@@ -58,8 +55,7 @@
 					<div class="label-input">
 						<span>Tai khoan</span>
 					</div>
-					<input name="user" property="login" /><br>
-					<br>
+					<input name="user" property="login" /><br> <br>
 					<div class="label-input">
 						<span>Mat khau</span>
 					</div>
@@ -111,14 +107,7 @@
 				</div>
 				<div id='dialogadd' hidden>
 					<form class="form-add">
-						<div class="add">
-							<div class="add-label1">
-								<span>Học kỳ</span> <input />
-							</div>
-							<div class="add-label1">
-								<span>Môn học</span> <input />
-							</div>
-						</div>
+						
 						<div class="add">
 							<div class="add-label1">
 								<span>Họ tên</span> <input />
@@ -126,16 +115,6 @@
 							<div class="add-label1">
 								<span>MSSV</span> <input />
 							</div>
-
-						</div>
-						<div class="add">
-							<div class="add-label1">
-								<span>Số tín</span> <input />
-							</div>
-							<div class="add-label1">
-								<span>Hệ số</span> <input />
-							</div>
-
 						</div>
 						<div class="add">
 							<div class="add-label1">
@@ -178,42 +157,26 @@
 					<table class="table table-hover table-bordered table-responsive-sm">
 						<thead>
 							<tr>
-								<th>Kỳ học</th>
-								<th>Môn học</th>
-								<th>Họ tên</th>
-								<th>MSSV</th>
-								<th>Số tín</th>
-								<th>Hệ số</th>
-								<th>Điểm quá trính</th>
-								<th>Điểm cuối kì</th>
-								<th>Điểm chữ</th>
-								<th>Ghi chú</th>
+								<th fieldname="semester">Kỳ học</th>
+								<th fieldname="subjectname">Môn học</th>
+								<th fieldname="classid">Mã lớp</th>
+								<th fieldname="studentname">Họ tên</th>
+								<th fieldname="studentid">MSSV</th>
+								<th fieldname="credit">Số tín</th>
+								<th fieldname="grade1">Điểm quá trính</th>
+								<th fieldname="grade2">Điểm cuối kì</th>
+								<th fieldname="weight">Trọng số</th>
+								<th fieldname="note">Ghi chú</th>
 							</tr>
 						</thead>
 						<tbody>
 						</tbody>
 					</table>
 				</div>
-				<!-- <div class="CPA-GPA content-footer">
-                    <input value="GPA: 4.0       CPA: 4.0" disabled />
-                </div>
-                <div class="credit content-footer">
-                    <input value="Số tín chỉ nợ: 0 Số tín chỉ tích lũy: 100" disabled />
-                </div>
-                <div class="content-right-footer">
-                    <span>Chú ý: Chỉ giáo viên mới có quyền thay đổi thông tin!</span>
-                </div> -->
-
+				<input type="hidden" id="teacherid" value="${teacherModel.getTeacherid()}"/>
+				<input type="hidden" id="subjectid" value="${teacherModel.getSubjectid()}"/>
 			</div>
 		</div>
-
-		<script
-			src="<c:url value='/template/Scrips/libraries/jquery-3.4.1.js'/>"></script>
-		<script
-			src="<c:url value='/template/Scrips/libraries/jquery-1.12.4.js'/>"></script>
-		<script src="<c:url value='/template/Scrips/libraries/jquery-ui.js'/>"></script>
-		<script src="<c:url value='/template/Scrips/libraries/common.js'/>"></script>
-		<script src="<c:url value='/template/Scrips/view/login.js'/>"></script>
-		<script src="<c:url value='/template/Scrips/view/student.js'/>"></script>
 </body>
+
 </html>

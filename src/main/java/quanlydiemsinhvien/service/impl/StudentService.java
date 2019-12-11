@@ -22,7 +22,7 @@ public class StudentService implements IStudentService{
 	@Override
 	public List<StudentGradeModel> getStudentGradeById(Long studentid) {
 		// TODO Auto-generated method stub
-		return studentGradeDao.getAllGradeByStudentId(studentid);
+		return studentDao.getStudentGradeById(studentid);
 	}
 	@Override
 	public StudentModel findbynameandpassword(String username, String password) {

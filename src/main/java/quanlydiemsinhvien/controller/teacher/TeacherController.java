@@ -30,8 +30,7 @@ public class TeacherController extends HttpServlet{
 			request.setAttribute("teacherModel", teacherModel);
 			if (teacherModel != null && teacherModel.getRoleid() == 1) {
 				SessionUtil.getInstance().putValue(request, "teacherModel", teacherModel);
-				RequestDispatcher rd = request.getRequestDispatcher("/views/admin/home.jsp");
-				rd.forward(request, response);
+				response.sendRedirect(request.getContextPath()+"/admin-home");
 			} else {
 				RequestDispatcher rd = request.getRequestDispatcher("/views/login.jsp");
 				rd.forward(request, response);
@@ -40,5 +39,10 @@ public class TeacherController extends HttpServlet{
 			RequestDispatcher rd = request.getRequestDispatcher("/views/login.jsp");
 			rd.forward(request, response);
 		}
+	}
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher rd = request.getRequestDispatcher("/views/admin/home.jsp");
+		rd.forward(request, response);
 	}
 }
