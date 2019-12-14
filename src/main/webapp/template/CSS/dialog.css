@@ -22,3 +22,9 @@
 .btn-add button {
     width: 60px;
 }
+
+.btn-confirm {
+    text-align: right;
+    position: relative;
+    top: 20px;
+}

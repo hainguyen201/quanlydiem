@@ -16,31 +16,18 @@ import quanlydiemsinhvien.utils.SessionUtil;
 
 @WebServlet(urlPatterns = { "/trang-chu", "/dang-nhap", "/thoat" })
 public class HomeController extends HttpServlet {
-	/**
-	 * 
-	 */
-
 	@Inject
 	private IStudentService studentService;
 	@Inject
 	private ITeacherService teacherService;
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Hàm kiểm tra user đăng nhập là admin hay student và thực hiện chức năng thoát
+	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		/*
-		 * // TODO Auto-generated method stub
-		 * 
-		 * ObjectMapper mapper = new ObjectMapper(); // khi client gửi lên tiếng việt
-		 * màkhông bị lỗi font request.setCharacterEncoding("UTF-8"); // khi server gửi
-		 * về phải định nghĩa kiểu json response.setContentType("application/json"); //
-		 * chuyển từ String json về Model List<StudentModel> studentModel =
-		 * studentService.getall(); mapper.writeValue(response.getOutputStream(),
-		 * studentModel);
-		 */
-
 		String status = request.getParameter("action");
 		String type = request.getParameter("usertype");
 		if (status.equals("login")) {
@@ -51,56 +38,34 @@ public class HomeController extends HttpServlet {
 				SessionUtil.getInstance().removeValue(request, "studentModel");
 				RequestDispatcher rd = request.getRequestDispatcher("/views/login.jsp");
 				rd.forward(request, response);
-			}else if(type.equals("teacher")) {
+			} else if (type.equals("teacher")) {
 				SessionUtil.getInstance().removeValue(request, "teacherModel");
+				SessionUtil.getInstance().removeValue(request, "subjectModel");
 				RequestDispatcher rd = request.getRequestDispatcher("/views/login.jsp");
 				rd.forward(request, response);
 			}
 		}
-		/*
-		 * else { response.sendRedirect(request.getContextPath() +"/student-view"); }
-		 */
-
 	}
 
+	/**
+	 * Hàm kiểm tra user đăng nhập là admin hay student và thực hiện chức năng đăng
+	 * nhập
+	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
 		String usertype = request.getParameter("usertype");
-		
 		if (action != null && action.equals("login")) {
 			/* StudentModel model = FormUtil.toModel(StudentModel.class, request); */
 			if (usertype.equals("student")) {
-				RequestDispatcher rd=request.getRequestDispatcher("/student-view");
+				RequestDispatcher rd = request.getRequestDispatcher("/student-view");
 				rd.forward(request, response);
-				
 			} else if (usertype.equals("teacher")) {
-				RequestDispatcher rd=request.getRequestDispatcher("/admin-home");
+				RequestDispatcher rd = request.getRequestDispatcher("/admin-home");
 				rd.forward(request, response);
 			}
-			/*
-			 * if (teacherModel != null) { System.out.println("đăng nhập thành công");
-			 * SessionUtil.getInstance().putValue(request, "USERMODEL", teacherModel); //
-			 * kiểm tra là user
-			 * 
-			 * if (teacherModel.getRoleid() == 2) {
-			 * response.sendRedirect(request.getContextPath() +
-			 * "/trang-chu?action=success");
-			 * 
-			 * } else // kiểm tra là admin else if
-			 * (model.getRole().getCode().equals("ADMIN")) {
-			 * response.sendRedirect(request.getContextPath() + "/admin-home"); }
-			 * 
-			 * } else { // nếu không tồn tại tài khoản nào thì chuyển tới trang đang nhập //
-			 * hàm getContextPath sẽ lấy trả về //
-			 * http://localhost:8080/new-jdbc-17-October-2019
-			 * response.sendRedirect(request.getContextPath() + "/dang-nhap?action=login");
-			 * }
-			 */
 		}
-
 	}
-
 }

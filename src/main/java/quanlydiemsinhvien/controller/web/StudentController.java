@@ -30,10 +30,6 @@ public class StudentController extends HttpServlet{
 			request.setAttribute("studentModel", studentModel);
 			if (studentModel != null && studentModel.getRoleid() == 2) {
 				SessionUtil.getInstance().putValue(request, "studentModel", studentModel);
-				/*
-				 * RequestDispatcher rd = request.getRequestDispatcher("/views/web/home.jsp");
-				 * rd.forward(request, response);
-				 */
 				response.sendRedirect(request.getContextPath()+"/student-view");
 			} else {
 				RequestDispatcher rd = request.getRequestDispatcher("/views/login.jsp");

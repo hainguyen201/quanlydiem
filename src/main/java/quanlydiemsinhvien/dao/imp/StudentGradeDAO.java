@@ -10,7 +10,7 @@ public class StudentGradeDAO extends AbstractDAO<StudentGradeModel> implements I
 
 	@Override
 	public List<StudentGradeModel> getAllGradeByStudentId(Long studentid) {
-		String sql = "select semester, g.subjectid, sub.subjectname, sub.credit, g.classid, g.grade1, g.grade2\r\n" + 
+		String sql = "select semester, g.subjectid, sub.subjectname, sub.credit, g.classid, g.grade1, g.grade2 " + 
 				"from grade g, subject sub, student \r\n" + 
 				"where g.studentid=?\r\n" + 
 				"and g.subjectid=sub.subjectid\r\n" + 

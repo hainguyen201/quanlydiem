@@ -1,59 +1,65 @@
 .content-right {
-    height: 100%;
-    position: relative;
+	height: 100%;
+	position: relative;
 }
 
 .content-right>div {
-    position: relative;
+	position: relative;
 }
 
 .datenow {
-    position: relative;
-    width: 100px;
-    float: right;
-    right: 60px;
+	position: relative;
+	width: 100px;
+	float: right;
+	right: 60px;
 }
 
 .datenow input {
-    width: 100px;
+	width: 100px;
 }
 
 .content-title {
-    left: 10%;
-    top: 30px;
-    width: 100%;
-    font-size: 20px;
+	left: 10%;
+	top: 30px;
+	width: 100%;
+	font-size: 20px;
 }
 
 .student-info {
-    top: 40px;
-    display: flex;
+	top: 40px;
+	display: flex;
 }
 
 .student-info>div {
-    margin-left: 20px;
+	margin-left: 20px;
 }
 
 .CPA-GPA {
-    top: 100px;
+	top: 100px;
 }
 
 .CPA-GPA input {
-    background-color: #CECCCD;
+	background-color: #CECCCD;
 }
 
 .credit {
-    top: 100px;
+	top: 100px;
 }
 
 .content-footer input {
-    width: 300px;
+	width: 300px;
 }
 
 .content-right-footer {
-    position: absolute !important;
-    top: 765px;
-    /* right: 932px; */
-    /* width: 119px; */
-    left: 320px;
+	position: absolute !important;
+	top: 765px;
+	/* right: 932px; */
+	/* width: 119px; */
+	left: 320px;
+}
+
+#search {
+	position: relative;
+	top: 15px;
+	left: 18px;
 }

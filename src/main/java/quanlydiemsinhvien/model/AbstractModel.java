@@ -1,4 +1,4 @@
-	package quanlydiemsinhvien.model;
+package quanlydiemsinhvien.model;
 
 public class AbstractModel {
 	private Long studentid;

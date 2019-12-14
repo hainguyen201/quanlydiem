@@ -46,11 +46,6 @@
 		<div class="content">
 			<div class="menu">
 				<select id="semester">
-					<option>Học kì</option>
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
 				</select>
 			</div>
 			<div class="content-right">
@@ -124,13 +119,13 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="CPA-GPA content-footer">
+				<!-- <div class="CPA-GPA content-footer">
 					<input value="GPA: 4.0       CPA: 4.0" disabled />
 				</div>
 				<div class="credit content-footer">
 					<input value="Số tín chỉ nợ: 0 Số tín chỉ tích lũy: 100"
 						disabled />
-				</div>
+				</div> -->
 			</div>
 		</div>
 

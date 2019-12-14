@@ -12,19 +12,10 @@ class student {
     inItEvent() {
 
     }
-    getData() {
-        var data = [];
-        $.ajax({
-            url: "student",
-            type: 'GET',
-            async: false,
-            dataType: 'json',
-            success: function(response) {
-                data = response;
-            }
-        });
-        return data;
-    }
+
+    /**
+     * Hàm lấy thông tin về điểm các môn học của sinh viên
+     */
     getStudentGrade() {
         var data = [];
         var id = $('input[fieldname="studentid"]').val();
@@ -41,6 +32,10 @@ class student {
         });
         return data;
     }
+
+    /**
+     * Hàm lấy thông tin điểm sinh viên và đưa vào trang web
+     */
     loadData() {
         var me = this;
         var data2 = this.getStudentGrade();
@@ -68,6 +63,10 @@ class student {
             $('.table tbody').append(rowHTML);
         });
     }
+
+    /**
+     * Hàm thực hiện lấy ngày tháng năm và hiển thị trên giao diện
+     */
     getDateNow() {
         var date = new Date($.now());
         var res = date.getMonth();

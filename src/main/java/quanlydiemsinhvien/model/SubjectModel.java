@@ -1,40 +1,42 @@
 package quanlydiemsinhvien.model;
 
 public class SubjectModel {
-	private Long mamon;
-	private String tenmon;
-	private int sotin;
-	private String bomon;
-	private Long magv;
-	public Long getMamon() {
-		return mamon;
+	private String subjectid;
+	private String subjectname;
+	private int credit;
+	private String department;
+	private Long teacherid;
+	
+	public String getSubjectid() {
+		return subjectid;
 	}
-	public void setMamon(Long mamon) {
-		this.mamon = mamon;
+	public void setSubjectid(String subjectid) {
+		this.subjectid = subjectid;
 	}
-	public String getTenmon() {
-		return tenmon;
+	public String getSubjectname() {
+		return subjectname;
 	}
-	public void setTenmon(String tenmon) {
-		this.tenmon = tenmon;
+	public void setSubjectname(String subjectname) {
+		this.subjectname = subjectname;
 	}
-	public int getSotin() {
-		return sotin;
+	public int getCredit() {
+		return credit;
 	}
-	public void setSotin(int sotin) {
-		this.sotin = sotin;
+	public void setCredit(int credit) {
+		this.credit = credit;
 	}
-	public String getBomon() {
-		return bomon;
+	public String getDepartment() {
+		return department;
 	}
-	public void setBomon(String bomon) {
-		this.bomon = bomon;
+	public void setDepartment(String department) {
+		this.department = department;
 	}
-	public Long getMagv() {
-		return magv;
+	public Long getTeacherid() {
+		return teacherid;
 	}
-	public void setMagv(Long magv) {
-		this.magv = magv;
+	public void setTeacherid(Long teacherid) {
+		this.teacherid = teacherid;
 	}
+	
 	
 }

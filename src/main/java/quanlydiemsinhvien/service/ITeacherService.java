@@ -10,5 +10,7 @@ public interface ITeacherService {
 	TeacherModel getTeacherInfo(Long teacherid);
 	TeacherModel findbynameandpassword(String name, String password);
 	List<TeacherGradeModel> findAllStudentGrade(String subjectid, Long teacherid);
-	void insertStudentGrade(StudentGradeModel studentGradeModel);
+	StudentGradeModel insertStudentGrade(StudentGradeModel studentGradeModel);
+	void deleteStudentGrade(Long studentid);
+	void updateStudentGrade(StudentGradeModel studentGradeModel, Long studentid);
 }

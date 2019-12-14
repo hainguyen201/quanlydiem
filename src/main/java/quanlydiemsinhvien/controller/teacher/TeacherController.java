@@ -1,6 +1,8 @@
 package quanlydiemsinhvien.controller.teacher;
 
+
 import java.io.IOException;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -10,7 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import quanlydiemsinhvien.model.SubjectModel;
 import quanlydiemsinhvien.model.TeacherModel;
+import quanlydiemsinhvien.service.ISubjectService;
 import quanlydiemsinhvien.service.ITeacherService;
 import quanlydiemsinhvien.utils.SessionUtil;
 @WebServlet(urlPatterns = {"/admin-home"})
@@ -20,6 +24,8 @@ public class TeacherController extends HttpServlet{
 	 */
 	@Inject
 	private ITeacherService teacherService;
+	@Inject
+	private ISubjectService subjectService;
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -28,8 +34,11 @@ public class TeacherController extends HttpServlet{
 				request.getParameter("password"));
 		if (teacherModel.getMessage().equals("success")) {
 			request.setAttribute("teacherModel", teacherModel);
+			List<SubjectModel> subjectModel=subjectService.getAllSubjectByTeacherid(teacherModel.getTeacherid());
+			request.setAttribute("subjectModel",subjectModel);
 			if (teacherModel != null && teacherModel.getRoleid() == 1) {
 				SessionUtil.getInstance().putValue(request, "teacherModel", teacherModel);
+				SessionUtil.getInstance().putValue(request, "subjectModel",subjectModel);
 				response.sendRedirect(request.getContextPath()+"/admin-home");
 			} else {
 				RequestDispatcher rd = request.getRequestDispatcher("/views/login.jsp");

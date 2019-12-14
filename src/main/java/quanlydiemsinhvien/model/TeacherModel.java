@@ -4,6 +4,7 @@ public class TeacherModel extends AbstractModel{
 	
 	private String subjectid;
 	private String email;
+	
 	public String getSubjectid() {
 		return subjectid;
 	}

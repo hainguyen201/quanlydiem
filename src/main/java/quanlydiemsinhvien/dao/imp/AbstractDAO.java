@@ -13,6 +13,7 @@ import java.util.List;
 
 import quanlydiemsinhvien.dao.GenericDAO;
 import quanlydiemsinhvien.mapper.RowMapper;
+import quanlydiemsinhvien.model.StudentGradeModel;
 
 public class AbstractDAO<T> implements GenericDAO<T> {
 	public Connection getConnection() {
@@ -68,8 +69,8 @@ public class AbstractDAO<T> implements GenericDAO<T> {
 		}
 	}
 
-	public boolean insert(String sql, Object... parameters) {
-
+	public StudentGradeModel insert(String sql, Object... parameters) {
+		StudentGradeModel studentGradeModel= new StudentGradeModel();
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		Connection connection = null;
@@ -79,8 +80,51 @@ public class AbstractDAO<T> implements GenericDAO<T> {
 			statement = connection.prepareStatement(sql);
 			// thêm RETURN_GENERATED_KEYS để thực hiện hàm getGeneratedKeys
 			setParameter(statement, parameters);
-			statement.executeUpdate();
-			resultSet = statement.executeQuery();// getGeneratedKeys lấy giá trị key được tự tạo ra
+			statement.executeUpdate();// getGeneratedKeys lấy giá trị key được tự tạo ra
+			connection.commit();// nếu k có commit thì sẽ không thay đổi db
+			studentGradeModel.setMessage("success");
+			return studentGradeModel;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			if (connection != null) {
+				try {
+					connection.rollback();// nếu 1 tác vụ fail thì roll back lại
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+
+			}
+			studentGradeModel.setMessage(e.getMessage());
+			return studentGradeModel;
+		} finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+				if (statement != null) {
+					statement.close();
+				}
+				if (resultSet != null) {
+					resultSet.close();
+				}
+			} catch (Exception e2) {
+				studentGradeModel.setMessage(e2.getMessage());
+				return studentGradeModel;
+			}
+		}
+
+	}
+	public boolean delete(String sql, RowMapper<T> rowMapper, Object... parameters) {
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		Connection connection = null;
+		try {
+			connection = getConnection();
+			connection.setAutoCommit(false);
+			statement = connection.prepareStatement(sql);
+			setParameter(statement, parameters);
+			// thêm RETURN_GENERATED_KEYS để thực hiện hàm getGeneratedKeys
+			statement.executeUpdate();// getGeneratedKeys lấy giá trị key được tự tạo ra
 			connection.commit();// nếu k có commit thì sẽ không thay đổi db
 			return true;
 		} catch (SQLException e) {
@@ -106,15 +150,16 @@ public class AbstractDAO<T> implements GenericDAO<T> {
 					resultSet.close();
 				}
 			} catch (Exception e2) {
+				System.out.println(e2.getMessage());
 				return false;
 			}
 		}
-
 	}
-
 	private void setParameter(PreparedStatement statement, Object... parameters) {
 		try {
-			for (int i = 0; i < parameters.length; i++) {
+			String s=statement.toString();
+			int x=parameters.length;
+			for (int i = 0; i < x; i++) {
 				Object parameter = parameters[i];
 				int index = i + 1;
 				if (parameter instanceof Long) {

@@ -3,5 +3,8 @@ package quanlydiemsinhvien.dao;
 import quanlydiemsinhvien.model.StudentGradeModel;
 
 public interface IUpdateStudentDAO {
-	void insertStudentGrade(StudentGradeModel studentGradeModel);
+	StudentGradeModel insertStudentGrade(StudentGradeModel studentGradeModel);
+	void deleteStudentGrade(Long studentid);
+	void updateStudentGrade(StudentGradeModel studentGradeModel, Long studentid);
+	
 }

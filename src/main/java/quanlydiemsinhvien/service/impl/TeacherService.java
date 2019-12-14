@@ -32,8 +32,18 @@ public class TeacherService implements ITeacherService{
 		return teacherGradeDao.findAllStudentGrade(subjectid, teacherid);
 	}
 	@Override
-	public void insertStudentGrade(StudentGradeModel studentGradeModel) {
-		updateStudentDao.insertStudentGrade(studentGradeModel);
+	public StudentGradeModel insertStudentGrade(StudentGradeModel studentGradeModel) {
+		 return updateStudentDao.insertStudentGrade(studentGradeModel);
+		
+	}
+	@Override
+	public void deleteStudentGrade(Long studentid) {
+		updateStudentDao.deleteStudentGrade(studentid);
+		
+	}
+	@Override
+	public void updateStudentGrade(StudentGradeModel studentGradeModel, Long studentid) {
+		updateStudentDao.updateStudentGrade(studentGradeModel, studentid);
 		
 	}
 	

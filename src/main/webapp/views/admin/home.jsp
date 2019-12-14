@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="/common/taglib.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
@@ -75,13 +77,12 @@
 		<div class="content">
 			<div class="menu">
 				<select id="subject">
-					<option value="it3080">Cấu trúc dữ liệu</option>
-					<option>Thuật toán ứng dụng</option>
-					<option>Các môn khác</option>
-					<option>Các môn khác</option>
-					<option>4</option>
+					<option>--Chọn môn học--</option>
+					<c:forEach var="sub" items="${subjectModel}">
+						<option value="${sub.getSubjectid()}">${sub.getSubjectname()}</option>
+					</c:forEach>
 				</select> <select id="semester">
-					<option>Học kì</option>
+					<option value="1">Học kì</option>
 					<option>1</option>
 					<option>2</option>
 					<option>3</option>
@@ -100,33 +101,49 @@
 				<hr
 					style="background-color: black; text-align: left; position: relative; top: 30px;"
 					noshade="noshade">
+				<input id="search" type="text" placeholder="Search..">
 				<div class="toolbar">
 					<button class="add-new">Thêm</button>
-					<button class="edit">Sửa</button>
-					<button class="delete">Xóa</button>
+					<button class="edit" disabled>Sửa</button>
+					<button class="delete" disabled>Xóa</button>
 				</div>
 				<div id='dialogadd' hidden>
 					<form class="form-add">
-						
+
 						<div class="add">
 							<div class="add-label1">
-								<span>Họ tên</span> <input />
+								<span>Học kỳ</span> <input fieldname="semester" />
 							</div>
 							<div class="add-label1">
-								<span>MSSV</span> <input />
+								<span>Mã môn học</span> <input fieldname="subjectid" />
 							</div>
 						</div>
 						<div class="add">
 							<div class="add-label1">
-								<span>Điểm QT</span> <input />
+								<span>Họ tên</span> <input fieldname="studentname" />
 							</div>
 							<div class="add-label1">
-								<span>Điểm cuối kì</span> <input />
+								<span>MSSV</span> <input fieldname="studentid" />
+							</div>
+
+						</div>
+						<div class="add">
+							<div class="add-label1">
+								<span>Mã lớp</span> <input fieldname="classid" />
+							</div>
+
+						</div>
+						<div class="add">
+							<div class="add-label1">
+								<span>Điểm QT</span> <input fieldname="grade1" />
+							</div>
+							<div class="add-label1">
+								<span>Điểm cuối kì</span> <input fieldname="grade2" />
 							</div>
 						</div>
 						<div class="add">
 							<div class="add-label1">
-								<span>Ghi chú</span> <input />
+								<span>Ghi chú</span> <input fieldname="note" />
 							</div>
 						</div>
 					</form>
@@ -134,12 +151,21 @@
 						<button class="save">Lưu</button>
 						<button class="cancel">Hủy</button>
 					</div>
+					<input id="updatetype" type="hidden" value="" />
 				</div>
 				<div id='dialogedit'>
 					<form class="form-edit"></form>
 				</div>
-				<div id='dialogdelete'>
-					<form class="form-delete"></form>
+				<div id='dialogdelete' hidden>
+					<form class="form-delete">
+						<div class="delete-title">
+							<span>Bạn có chắc muôn xóa ?</span>
+						</div>
+						<div class="btn-confirm">
+							<button class="confirm-delete">Xóa</button>
+							<button class="confirm-cancel">Hủy</button>
+						</div>
+					</form>
 				</div>
 				<!-- <div class="student-info">
                     <div class="student-name">
@@ -169,12 +195,13 @@
 								<th fieldname="note">Ghi chú</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="mytable">
 						</tbody>
 					</table>
 				</div>
-				<input type="hidden" id="teacherid" value="${teacherModel.getTeacherid()}"/>
-				<input type="hidden" id="subjectid" value="${teacherModel.getSubjectid()}"/>
+				<input type="hidden" id="teacherid"
+					value="${teacherModel.getTeacherid()}" /> <input type="hidden"
+					id="subjectid" value="${teacherModel.getSubjectid()}" />
 			</div>
 		</div>
 </body>
