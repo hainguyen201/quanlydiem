@@ -5,6 +5,8 @@ $(document).ready(function() {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
     });
+    
+    
 });
 class teacher {
     constructor() {
@@ -20,12 +22,19 @@ class teacher {
         $(document).on('click', '.add-new', this.openDialogAdd);
         $(document).on('click', 'button.cancel', this.closeDialog);
         $(document).on('click', 'button.edit', this.openDialogEdit);
-        $('.table tbody').on('click', 'tr', this.rowTick);
+        $('.table-grade .table tbody').on('click', 'tr', this.rowTick);
         $(document).on('click', 'button.delete', this.openDialogDelete.bind(this));
         $(document).on('click', 'button.save', this.saveData.bind(this));
         $(document).on('click', 'button.confirm-delete', this.deleteData.bind(this));
         $(document).on('click', 'button.confirm-cancel', this.closeDialogDelete);
         $('#subject').on('change', this.loadData.bind(this));
+        $(document).on('click', 'button.dialogalert-add', this.openDialogAddStudent);
+        $(document).on('click', 'button.savestudent', this.saveStudent.bind(this));
+        $(document).on('click', 'button.cancelstudent', this.closeDialogAddStudent);
+        $(document).on('click', 'button.dialegalert-cancel', this.closeDialogAlertAdd);
+        $(document).on('click', 'button.add-student', this.openDialogAddStudentFirst);
+
+
     }
 
     /**
@@ -42,6 +51,13 @@ class teacher {
         $("#dialogdelete").dialog('close');
     }
 
+    closeDialogAddStudent() {
+        $("#dialogaddstudent").dialog('close');
+    }
+    closeDialogAlertAdd() {
+        $("#dialogalert").dialog('close');
+    }
+
     /**
      * Hàm mở dialog thêm
      */
@@ -51,7 +67,44 @@ class teacher {
         $('#updatetype').val("post");
         $('#dialogadd').prop('hidden', false);
         $("#dialogadd").dialog({
-            title: "Thêm mới sinh viên",
+            title: "Thêm mới điểm sinh viên",
+            modal: true,
+            height: 350,
+            width: 700,
+            resizable: false,
+        });
+        var date = new Date($.now());
+        var month = date.getMonth();
+
+        if (month >= 8 || month <= 1) {
+            month = 1;
+        } else {
+            month = 2;
+        }
+        var y = date.getFullYear();
+        var s = y.toString() + month.toString();
+        $('input[fieldname="semester"]').val(s);
+    }
+    openDialogAddStudent(event) {
+        $('#dialogalert').prop('hidden', true);
+        $('#dialogalert').dialog('close');
+        $("#dialogaddstudent").prop('hidden', false);
+        $("#dialogaddstudent").dialog({
+            title: "Thêm mới thông tin sinh viên",
+            modal: true,
+            height: 350,
+            width: 700,
+            resizable: false,
+        });
+        $('.addstudent input[fieldname="studentname"]').val($('.add input[fieldname="studentname"]').val());
+        $('.addstudent input[fieldname="studentid"]').val($('.add input[fieldname="studentid"]').val());
+        event.preventDefault();
+    }
+
+    openDialogAddStudentFirst() {
+        $("#dialogaddstudent").prop('hidden', false);
+        $("#dialogaddstudent").dialog({
+            title: "Thêm mới thông tin sinh viên",
             modal: true,
             height: 350,
             width: 700,
@@ -64,7 +117,6 @@ class teacher {
      */
     openDialogEdit() {
         $('#dialogadd').prop('hidden', false);
-
         $('#updatetype').val("put");
         $("#dialogadd").dialog({
             title: "Sửa điểm sinh viên",
@@ -87,8 +139,16 @@ class teacher {
     openDialogDelete() {
         $('#dialogdelete').prop('hidden', false);
         $("#dialogdelete").dialog({
-            title: "Sửa điểm sinh viên",
+            title: "Xóa điểm sinh viên",
             height: 150
+        });
+    }
+
+    openDialogAlert() {
+        $('#dialogalert').prop('hidden', false);
+        $("#dialogalert").dialog({
+            title: "Thông báo",
+            height: 170
         });
     }
 
@@ -112,9 +172,36 @@ class teacher {
         }
     }
 
-    /**
-     * Hàm lưu dũ liệu sau khi người dùng thực hiện thêm mới hoặc sửa dữ liệu
-     */
+    saveStudent() {
+            var me = this;
+            var data = {};
+            var inputfield = $('.addstudent input');
+            $.each(inputfield, function(index, item) {
+                var fieldname = $(item).attr('fieldname');
+                data[fieldname] = $(item).val();
+            });
+            $.ajax({
+                type: "post",
+                url: "adminapi?type=newstudent",
+                data: JSON.stringify(data),
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                success: function(response) {
+                    if (response == null) {
+                        $("#dialogaddstudent").dialog('close');
+                        alert("Lỗi không thêm được sinh viên!")
+                    } else {
+                    	$('.alert').fadeIn();
+                        $('.alert').fadeOut(5000);
+                        $("#dialogaddstudent").dialog('close');
+                    }
+
+                }
+            });
+        }
+        /**
+         * Hàm lưu dũ liệu sau khi người dùng thực hiện thêm mới hoặc sửa dữ liệu
+         */
     saveData() {
         var me = this;
         var data = {};
@@ -123,6 +210,7 @@ class teacher {
             var fieldname = $(item).attr('fieldname');
             data[fieldname] = $(item).val();
         });
+        var subjectid = $('#subject option:selected').val();
         var updatetype = $('#updatetype').val();
         if (updatetype === "post") {
             $.ajax({
@@ -132,11 +220,15 @@ class teacher {
                 async: false,
                 contentType: "application/json; charset=utf-8",
                 success: function(response) {
-                    if (response.message == "success") {
+                    if (response == null) {
+
+                        $("#dialogadd").dialog('close');
+                        me.openDialogAlert();
+                    } else if (response.message == "success") {
+                    	$('.alert').fadeIn();
+                        $('.alert').fadeOut(5000);
                         $("#dialogadd").dialog('close');
                         me.loadData();
-                    } else {
-                        alert();
                     }
 
                 }
@@ -145,7 +237,7 @@ class teacher {
             var studentid = $('.tick td[fieldname="studentid"]').html();
             $.ajax({
                 type: updatetype,
-                url: "adminapi?studentid=" + studentid,
+                url: "adminapi?studentid=" + studentid + "&subjectid=" + subjectid,
                 data: JSON.stringify(data),
                 async: false,
                 contentType: "application/json; charset=utf-8",
@@ -173,8 +265,10 @@ class teacher {
             contentType: "application/json; charset=utf-8",
             success: function(response) {
                 $('.tick').closest("tr").remove();
+                me.closeDialogDelete();
             }
         });
+        event.preventDefault();
     }
 
     /**
@@ -240,6 +334,7 @@ class teacher {
 
 
     }
+
     checkTickRow() {
         var tickCount = $('.tick').length;
     }

@@ -13,8 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import quanlydiemsinhvien.model.StudentGradeModel;
+import quanlydiemsinhvien.model.StudentModel;
 import quanlydiemsinhvien.model.TeacherGradeModel;
+import quanlydiemsinhvien.service.IStudentService;
 import quanlydiemsinhvien.service.ITeacherService;
+import quanlydiemsinhvien.service.impl.StudentService;
 import quanlydiemsinhvien.utils.HttpUtil;
 
 @WebServlet(urlPatterns = { "/adminapi" })
@@ -25,7 +28,12 @@ public class Teacherapi extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@Inject
 	private ITeacherService teacherService;
-
+	@Inject
+	private IStudentService studentService;
+	
+	/**
+	 * Hàm lấy điểm của sinh viên với mã môn và mã giáo viên tương ứng
+	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -35,13 +43,20 @@ public class Teacherapi extends HttpServlet {
 		// khi server gửi về phải định nghĩa kiểu json
 		response.setContentType("application/json");
 		// chuyển từ String json về Model
-		Long teacherid = new Long(Long.parseLong(request.getParameter("teacherid")));
+		String teacherid=request.getParameter("teacherid");
 		String subjectid = request.getParameter("subjectid");
-		List<TeacherGradeModel> teacherGradeModels = teacherService.findAllStudentGrade(subjectid, teacherid);
-		mapper.writeValue(response.getOutputStream(), teacherGradeModels);
-
+		if(teacherid!=null && subjectid!=null) {
+			List<TeacherGradeModel> teacherGradeModels = teacherService.findAllStudentGrade(subjectid, Long.parseLong(teacherid));
+			mapper.writeValue(response.getOutputStream(), teacherGradeModels);
+		}else {
+			List<StudentModel> studentModels=studentService.getAllStudent();
+			mapper.writeValue(response.getOutputStream(), studentModels);
+		}
 	}
-
+	/**
+	 * Controller thêm thông tin của một sinh viên mới nếu chưa tồn tại
+	 * Controller thêm điểm của một sinh viên nếu đã tồn tại sv
+	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -50,12 +65,20 @@ public class Teacherapi extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		// khi server gửi về phải định nghĩa kiểu json
 		response.setContentType("application/json");
-
-		StudentGradeModel studentGradeModel = HttpUtil.of(request.getReader()).toModel(StudentGradeModel.class);
-		studentGradeModel=teacherService.insertStudentGrade(studentGradeModel);
-		mapper.writeValue(response.getOutputStream(), studentGradeModel);
-
+		String type=request.getParameter("type");
+		if(type!=null) {
+			StudentModel studentModel= HttpUtil.of(request.getReader()).toModel(StudentModel.class);
+			studentModel=studentService.insertStudent(studentModel);
+			mapper.writeValue(response.getOutputStream(), studentModel);
+		}else {
+			StudentGradeModel studentGradeModel = HttpUtil.of(request.getReader()).toModel(StudentGradeModel.class);
+			studentGradeModel=teacherService.insertStudentGrade(studentGradeModel);
+			mapper.writeValue(response.getOutputStream(), studentGradeModel);
+		}
 	}
+	/**
+	 * Xóa điểm của một sinh viên
+	 */
 	@Override
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
@@ -76,6 +99,7 @@ public class Teacherapi extends HttpServlet {
 	@Override
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String studentid=request.getParameter("studentid");
+		String subjectid=request.getParameter("subjectid");
 		ObjectMapper mapper = new ObjectMapper();
 		// khi client gửi lên tiếng việt màkhông bị lỗi font
 		request.setCharacterEncoding("UTF-8");
@@ -83,7 +107,7 @@ public class Teacherapi extends HttpServlet {
 		response.setContentType("application/json");
 		if(studentid!=null) {
 			StudentGradeModel studentGradeModel = HttpUtil.of(request.getReader()).toModel(StudentGradeModel.class);
-			teacherService.updateStudentGrade(studentGradeModel, Long.parseLong(studentid));
+			teacherService.updateStudentGrade(studentGradeModel, Long.parseLong(studentid), subjectid);
 			mapper.writeValue(response.getOutputStream(), studentGradeModel);
 		}
 		

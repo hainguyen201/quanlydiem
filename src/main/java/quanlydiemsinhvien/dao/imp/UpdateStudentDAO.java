@@ -8,10 +8,11 @@ public class UpdateStudentDAO extends AbstractDAO<StudentGradeModel> implements 
 
 	@Override
 	public StudentGradeModel insertStudentGrade(StudentGradeModel studentGradeModel) {
-		StringBuilder sql=new StringBuilder("insert into student (studentid, studentname) values (?, ?)\r\n" + 
-				"insert into grade (studentid,subjectid,semester,classid,grade1, grade2, note) values (?,?,?,?,?, ?, ?)");
-		return insert(sql.toString(), studentGradeModel.getStudentid(),
-				studentGradeModel.getStudentname(),
+		StringBuilder sql=new StringBuilder("");
+		/* sql.append("insert into student (studentid, studentname) values (?, ?) "); */
+		sql.append("insert into grade (studentid,subjectid,semester,classid,grade1, grade2, note) values (?,?,?,?,?, ?, ?)");
+		
+		return insert(sql.toString(),
 				studentGradeModel.getStudentid(),
 				studentGradeModel.getSubjectid(),
 				studentGradeModel.getSemester(),
@@ -23,9 +24,7 @@ public class UpdateStudentDAO extends AbstractDAO<StudentGradeModel> implements 
 
 	@Override
 	public void deleteStudentGrade(Long studentid) {
-		StringBuilder sql=new StringBuilder("delete from student\r\n" + 
-				"where studentid=" +studentid+ 
-				" delete from grade \r\n" + 
+		StringBuilder sql=new StringBuilder(" delete from grade \r\n" + 
 				"where studentid="+studentid);
 		delete(sql.toString(), new StudentGradeMapper());
 		
@@ -33,9 +32,9 @@ public class UpdateStudentDAO extends AbstractDAO<StudentGradeModel> implements 
 
 	@Override
 	
-	public void updateStudentGrade(StudentGradeModel studentGradeModel, Long studentid) {
+	public void updateStudentGrade(StudentGradeModel studentGradeModel, Long studentid, String subjectid) {
 	   StringBuilder sql=new StringBuilder("update student set studentname=?,studentid=? where studentid=?");
-	   sql.append(" update grade set studentid=?,grade1=?, grade2=?, note=?, classid=?, semester=?, subjectid=? where studentid=?");
+	   sql.append(" update grade set studentid=?,grade1=?, grade2=?, note=?, classid=?, semester=?, subjectid=? where studentid=? and subjectid=?");
 	   delete(sql.toString(), new StudentGradeMapper(), 
 			   studentGradeModel.getStudentname(),
 			   studentGradeModel.getStudentid(),
@@ -47,7 +46,8 @@ public class UpdateStudentDAO extends AbstractDAO<StudentGradeModel> implements 
 			   studentGradeModel.getClassid(),
 			   studentGradeModel.getSemester(),
 			   studentGradeModel.getSubjectid(),
-			   studentid);
+			   studentid,
+			   subjectid);
 	}
 	
 }

@@ -9,7 +9,15 @@ public class StudentModel extends AbstractModel{
 	private Date dateofbirth;
 	private String gender;
 	private String studentclass;
+	private String dob;
 	private StudentGradeModel studentGradeModel;
+	
+	public String getDob() {
+		return dob;
+	}
+	public void setDob(String dob) {
+		this.dob = dob;
+	}
 	public StudentGradeModel getStudentGradeModel() {
 		return studentGradeModel;
 	}
@@ -34,6 +42,7 @@ public class StudentModel extends AbstractModel{
 	public void setDistrict(String district) {
 		this.district = district;
 	}
+	
 	public Date getDateofbirth() {
 		return dateofbirth;
 	}

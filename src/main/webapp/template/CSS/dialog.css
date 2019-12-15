@@ -28,3 +28,17 @@
     position: relative;
     top: 20px;
 }
+
+.addstudent {
+    display: flex;
+}
+
+.alert {
+	display:none;
+    position: absolute;
+    z-index: 101;
+    text-align: center;
+    width: 50%;
+    left:25%;
+    
+}

@@ -10,6 +10,9 @@
 </head>
 
 <body>
+	<div class="alert alert-success" role="alert">
+		<strong>Chúc mừng !</strong> Bạn thêm thành công
+	</div>
 	<header class="header">
 		<div class="logo_uni">
 			<a href="#" class="logo_uni_header"></a>
@@ -81,12 +84,6 @@
 					<c:forEach var="sub" items="${subjectModel}">
 						<option value="${sub.getSubjectid()}">${sub.getSubjectname()}</option>
 					</c:forEach>
-				</select> <select id="semester">
-					<option value="1">Học kì</option>
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
 				</select>
 
 			</div>
@@ -103,6 +100,8 @@
 					noshade="noshade">
 				<input id="search" type="text" placeholder="Search..">
 				<div class="toolbar">
+					
+					<button class="add-student">Thêm SV</button>
 					<button class="add-new">Thêm</button>
 					<button class="edit" disabled>Sửa</button>
 					<button class="delete" disabled>Xóa</button>
@@ -153,6 +152,46 @@
 					</div>
 					<input id="updatetype" type="hidden" value="" />
 				</div>
+				<div id='dialogaddstudent' hidden>
+					<form class="form-add">
+						<div class="addstudent">
+							<div class="add-label1">
+								<span>Họ tên</span> <input fieldname="studentname" />
+							</div>
+							<div class="add-label1">
+								<span>MSSV</span> <input fieldname="studentid" />
+							</div>
+						</div>
+						<div class="addstudent">
+							<div class="add-label1">
+								<span>Lớp</span> <input fieldname="studentclass" />
+							</div>
+							<div class="add-label1">
+								<span>Giới tính</span> <input fieldname="gender" />
+							</div>
+						</div>
+						<div class="addstudent">
+							<div class="add-label1">
+								<span>Khoa, viện</span> <input fieldname="faculty" />
+							</div>
+							<div class="add-label1">
+								<span>Ngày sinh</span> <input fieldname="dob" />
+							</div>
+						</div>
+						<div class="addstudent">
+							<div class="add-label1">
+								<span>Email</span> <input fieldname="email" />
+							</div>
+							<div class="add-label1">
+								<span>Địa chỉ</span> <input fieldname="district" />
+							</div>
+						</div>
+					</form>
+					<div class="btn-add">
+						<button class="savestudent">Lưu</button>
+						<button class="cancelstudent">Hủy</button>
+					</div>
+				</div>
 				<div id='dialogedit'>
 					<form class="form-edit"></form>
 				</div>
@@ -164,6 +203,18 @@
 						<div class="btn-confirm">
 							<button class="confirm-delete">Xóa</button>
 							<button class="confirm-cancel">Hủy</button>
+						</div>
+					</form>
+				</div>
+				<div id="dialogalert" hidden>
+					<form>
+						<div class="alert-title">
+							<span>Sinh viên không tồn tại, bạn có muốn thêm sinh viên
+								mới</span>
+						</div>
+						<div class="btn-confirm">
+							<button class="dialogalert-add">Thêm</button>
+							<button class="dialegalert-cancel">Hủy</button>
 						</div>
 					</form>
 				</div>
@@ -179,7 +230,7 @@
 
                 </div> -->
 
-				<div class="main-table">
+				<div class="main-table table-grade" >
 					<table class="table table-hover table-bordered table-responsive-sm">
 						<thead>
 							<tr>
@@ -198,7 +249,8 @@
 						<tbody id="mytable">
 						</tbody>
 					</table>
-				</div>
+				</div >
+			
 				<input type="hidden" id="teacherid"
 					value="${teacherModel.getTeacherid()}" /> <input type="hidden"
 					id="subjectid" value="${teacherModel.getSubjectid()}" />

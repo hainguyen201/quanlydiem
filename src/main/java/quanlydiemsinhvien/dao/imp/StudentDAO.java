@@ -10,8 +10,8 @@ import quanlydiemsinhvien.model.StudentModel;
 
 public class StudentDAO extends AbstractDAO<StudentModel> implements IStudentDAO{
 	@Override
-	public List<StudentModel> getall() {
-		String sql = "select * from student";
+	public List<StudentModel> getAllStudent() {
+		String sql = "select * from student left join userrole on student.studentid =userrole.userid";
 		return query(sql, new StudentMapper());
 	}
 
@@ -35,6 +35,22 @@ public class StudentDAO extends AbstractDAO<StudentModel> implements IStudentDAO
 		sql.append(" inner join subject sub on g.subjectid=sub.subjectid");
 		sql.append(" where s.studentid="+studentid);
 		return query(sql.toString(), new StudentGradeMapper());
+	}
+
+	@Override
+	public StudentModel insertStudent(StudentModel studentModel) {
+		StringBuilder sql= new StringBuilder("");
+		sql.append("insert into student (studentid, studentname, email, faculty, district, dateofbirth, gender, studentclass)");
+		sql.append(" values (?,?,?,?,?,convert(date,?),?,?)");
+		return insertStudent(sql.toString(),
+				studentModel.getStudentid(),
+				studentModel.getStudentname(),
+				studentModel.getEmail(),
+				studentModel.getFaculty(),
+				studentModel.getDistrict(),
+				studentModel.getDob(),
+				studentModel.getGender(),
+				studentModel.getStudentclass());
 	}
 	
 	

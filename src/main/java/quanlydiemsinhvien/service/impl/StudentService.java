@@ -15,10 +15,7 @@ public class StudentService implements IStudentService{
 	private IStudentDAO studentDao;
 	@Inject
 	private IStudentGradeDAO studentGradeDao;
-	@Override
-	public List<StudentModel> getall() {
-		return studentDao.getall();
-	}
+	
 	@Override
 	public List<StudentGradeModel> getStudentGradeById(Long studentid) {
 		// TODO Auto-generated method stub
@@ -28,5 +25,13 @@ public class StudentService implements IStudentService{
 	public StudentModel findbynameandpassword(String username, String password) {
 		return studentDao.findbynameandpassword(username, password);
 	}
-
+	@Override
+	public List<StudentModel> getAllStudent() {
+		return studentDao.getAllStudent();
+	}
+	@Override
+	public StudentModel insertStudent(StudentModel studentModel) {
+		return studentDao.insertStudent(studentModel);
+	}
+	
 }

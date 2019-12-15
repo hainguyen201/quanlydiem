@@ -14,6 +14,7 @@ import java.util.List;
 import quanlydiemsinhvien.dao.GenericDAO;
 import quanlydiemsinhvien.mapper.RowMapper;
 import quanlydiemsinhvien.model.StudentGradeModel;
+import quanlydiemsinhvien.model.StudentModel;
 
 public class AbstractDAO<T> implements GenericDAO<T> {
 	public Connection getConnection() {
@@ -69,6 +70,51 @@ public class AbstractDAO<T> implements GenericDAO<T> {
 		}
 	}
 
+	public StudentModel insertStudent(String sql, Object... parameters) {
+		StudentModel studentModel= new StudentModel();
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		Connection connection = null;
+		try {
+			connection = getConnection();
+			connection.setAutoCommit(false);
+			statement = connection.prepareStatement(sql);
+			// thêm RETURN_GENERATED_KEYS để thực hiện hàm getGeneratedKeys
+			setParameter(statement, parameters);
+			statement.executeUpdate();// getGeneratedKeys lấy giá trị key được tự tạo ra
+			connection.commit();// nếu k có commit thì sẽ không thay đổi db
+			studentModel.setMessage("success");
+			return studentModel;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			if (connection != null) {
+				try {
+					connection.rollback();// nếu 1 tác vụ fail thì roll back lại
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+
+			}
+			studentModel.setMessage(e.getMessage());
+			return studentModel;
+		} finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+				if (statement != null) {
+					statement.close();
+				}
+				if (resultSet != null) {
+					resultSet.close();
+				}
+			} catch (Exception e2) {
+				studentModel.setMessage(e2.getMessage());
+				return studentModel;
+			}
+		}
+
+	}
 	public StudentGradeModel insert(String sql, Object... parameters) {
 		StudentGradeModel studentGradeModel= new StudentGradeModel();
 		PreparedStatement statement = null;
@@ -177,7 +223,9 @@ public class AbstractDAO<T> implements GenericDAO<T> {
 					statement.setNull(index, Types.NULL);
 				}else if(parameter instanceof Float) {
 					statement.setFloat(index, (Float) parameter);
-				}
+				}else if(parameter instanceof Date)
+					statement.setDate(index, (Date)parameter);	
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
