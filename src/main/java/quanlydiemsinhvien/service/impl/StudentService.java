@@ -13,8 +13,6 @@ import quanlydiemsinhvien.service.IStudentService;
 public class StudentService implements IStudentService{
 	@Inject
 	private IStudentDAO studentDao;
-	@Inject
-	private IStudentGradeDAO studentGradeDao;
 	
 	@Override
 	public List<StudentGradeModel> getStudentGradeById(Long studentid) {
@@ -33,5 +31,26 @@ public class StudentService implements IStudentService{
 	public StudentModel insertStudent(StudentModel studentModel) {
 		return studentDao.insertStudent(studentModel);
 	}
+	@Override
+	public StudentModel deleteStudent(Long studentid) {
+		StudentModel studentModel=new StudentModel();
+		if(studentDao.deleteStudent(studentid)) {
+			studentModel.setMessage("success");
+			return studentModel;
+		}else {
+			studentModel.setMessage("error");
+			return studentModel;
+		}
+	}
+	@Override
+	public StudentModel updateStudent(StudentModel studentModel, Long studentid) {
+		if(studentDao.updateStudent(studentModel, studentid)) {
+			studentModel.setMessage("success");
+		}else {
+			studentModel.setMessage("error");
+		}
+		return studentModel;
+	}
+	
 	
 }

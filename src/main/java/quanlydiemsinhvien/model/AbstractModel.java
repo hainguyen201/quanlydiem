@@ -1,5 +1,4 @@
 package quanlydiemsinhvien.model;
-
 public class AbstractModel {
 	private Long studentid;
 	private Long teacherid;

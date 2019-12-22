@@ -11,4 +11,6 @@ public interface IStudentService {
 	List<StudentGradeModel> getStudentGradeById(Long studentid);
 	StudentModel findbynameandpassword(String username, String password);
 	StudentModel insertStudent(StudentModel studentModel);
+	StudentModel deleteStudent(Long studentid);
+	StudentModel updateStudent(StudentModel studentModel, Long studentid);
 }

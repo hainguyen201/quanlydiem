@@ -10,9 +10,16 @@
 </head>
 
 <body>
-	<div class="alert alert-success" role="alert">
-		<strong>Chúc mừng !</strong> Bạn thêm thành công
+	<div class="alert alert-success alert-add-success" role="alert">
+		<strong>Chúc mừng !</strong> Bạn đã thêm thành công
 	</div>
+	<div class="alert alert-success alert-edit-success" role="alert">
+		<strong>Chúc mừng !</strong> Bạn đã sửa thành công
+	</div>
+	<div class="alert alert-success alert-delete-success" role="alert">
+		<strong>Chúc mừng !</strong> Bạn đã xóa thành công
+	</div>
+	<div class="alert alert-danger" role="alert">Lỗi không thêm được sinh viên!</div>	
 	<header class="header">
 		<div class="logo_uni">
 			<a href="#" class="logo_uni_header"></a>
@@ -92,7 +99,7 @@
 					<input id="datenow" disabled />
 				</div>
 				<div class="content-title">
-					<span>Cập nhật thông tin sinh viên</span>
+					<span>Cập nhật điểm sinh viên</span>
 
 				</div>
 				<hr
@@ -100,8 +107,7 @@
 					noshade="noshade">
 				<input id="search" type="text" placeholder="Search..">
 				<div class="toolbar">
-					
-					<button class="add-student">Thêm SV</button>
+					<button ><a href='http://localhost:8080/quanlydiemsinhvien/list-student'>Xem DS</a></button>
 					<button class="add-new">Thêm</button>
 					<button class="edit" disabled>Sửa</button>
 					<button class="delete" disabled>Xóa</button>
@@ -230,7 +236,7 @@
 
                 </div> -->
 
-				<div class="main-table table-grade" >
+				<div class="main-table table-grade">
 					<table class="table table-hover table-bordered table-responsive-sm">
 						<thead>
 							<tr>
@@ -249,8 +255,7 @@
 						<tbody id="mytable">
 						</tbody>
 					</table>
-				</div >
-			
+				</div>
 				<input type="hidden" id="teacherid"
 					value="${teacherModel.getTeacherid()}" /> <input type="hidden"
 					id="subjectid" value="${teacherModel.getSubjectid()}" />

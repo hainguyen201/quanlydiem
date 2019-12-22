@@ -5,11 +5,12 @@ $(document).ready(function() {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
     });
-    
-    
+
+
 });
-class teacher {
+class teacher extends base {
     constructor() {
+        super();
         this.inItEvent();
         this.getDateNow();
         this.checkTickRow();
@@ -19,20 +20,20 @@ class teacher {
      * Hàm thực hiện bắt các sự kiện trên giao diện
      */
     inItEvent() {
-        $(document).on('click', '.add-new', this.openDialogAdd);
+        $(document).on('click', '.add-new', this.openDialogAdd.bind(this));
         $(document).on('click', 'button.cancel', this.closeDialog);
-        $(document).on('click', 'button.edit', this.openDialogEdit);
+        $(document).on('click', 'button.edit', this.openDialogEdit.bind(this));
         $('.table-grade .table tbody').on('click', 'tr', this.rowTick);
         $(document).on('click', 'button.delete', this.openDialogDelete.bind(this));
         $(document).on('click', 'button.save', this.saveData.bind(this));
         $(document).on('click', 'button.confirm-delete', this.deleteData.bind(this));
         $(document).on('click', 'button.confirm-cancel', this.closeDialogDelete);
         $('#subject').on('change', this.loadData.bind(this));
-        $(document).on('click', 'button.dialogalert-add', this.openDialogAddStudent);
+        $(document).on('click', 'button.dialogalert-add', this.openDialogAddStudent.bind(this));
         $(document).on('click', 'button.savestudent', this.saveStudent.bind(this));
         $(document).on('click', 'button.cancelstudent', this.closeDialogAddStudent);
         $(document).on('click', 'button.dialegalert-cancel', this.closeDialogAlertAdd);
-        $(document).on('click', 'button.add-student', this.openDialogAddStudentFirst);
+        $(document).on('click', 'button.add-student', this.openDialogAddStudentFirst.bind(this));
 
 
     }
@@ -49,11 +50,10 @@ class teacher {
      */
     closeDialogDelete() {
         $("#dialogdelete").dialog('close');
+        event.preventDefault();
     }
 
-    closeDialogAddStudent() {
-        $("#dialogaddstudent").dialog('close');
-    }
+
     closeDialogAlertAdd() {
         $("#dialogalert").dialog('close');
     }
@@ -62,6 +62,8 @@ class teacher {
      * Hàm mở dialog thêm
      */
     openDialogAdd() {
+        var me = this;
+        me.showinputagain();
         $('#dialogadd input').val();
         $('input[fieldname="subjectid"]').val($('#subject option:selected').val());
         $('#updatetype').val("post");
@@ -86,6 +88,9 @@ class teacher {
         $('input[fieldname="semester"]').val(s);
     }
     openDialogAddStudent(event) {
+        var me = this;
+        me.showinputagain();
+        $('#updatetype').val("post");
         $('#dialogalert').prop('hidden', true);
         $('#dialogalert').dialog('close');
         $("#dialogaddstudent").prop('hidden', false);
@@ -102,6 +107,9 @@ class teacher {
     }
 
     openDialogAddStudentFirst() {
+        var me = this;
+        me.showinputagain();
+        $('#updatetype').val("post");
         $("#dialogaddstudent").prop('hidden', false);
         $("#dialogaddstudent").dialog({
             title: "Thêm mới thông tin sinh viên",
@@ -116,6 +124,8 @@ class teacher {
      * Hàm mở dialog sửa
      */
     openDialogEdit() {
+        var me = this;
+        me.hideinput();
         $('#dialogadd').prop('hidden', false);
         $('#updatetype').val("put");
         $("#dialogadd").dialog({
@@ -136,13 +146,7 @@ class teacher {
     /**
      * Hàm mở dialog xóa
      */
-    openDialogDelete() {
-        $('#dialogdelete').prop('hidden', false);
-        $("#dialogdelete").dialog({
-            title: "Xóa điểm sinh viên",
-            height: 150
-        });
-    }
+
 
     openDialogAlert() {
         $('#dialogalert').prop('hidden', false);
@@ -152,56 +156,11 @@ class teacher {
         });
     }
 
+
     /**
-     * Hàm chọn một  hàng sau khi click chuột
-     * @param {*} event 
+     * Hàm lưu dũ liệu sau khi người dùng thực hiện thêm mới hoặc sửa dữ
+     * liệu
      */
-    rowTick(event) {
-        $('button.edit').prop("disable", false);
-        $('button.delete').prop("disable", false);
-        if (event.ctrlKey) {
-            $(this).addClass('tick');
-            $('button.delete').removeAttr('disabled');
-
-        } else {
-            $('.table tbody tr').removeClass('tick');
-            $(this).addClass('tick');
-            $('button.delete').removeAttr('disabled');
-            $('button.add-new').removeAttr('disabled');
-            $('button.edit').removeAttr('disabled');
-        }
-    }
-
-    saveStudent() {
-            var me = this;
-            var data = {};
-            var inputfield = $('.addstudent input');
-            $.each(inputfield, function(index, item) {
-                var fieldname = $(item).attr('fieldname');
-                data[fieldname] = $(item).val();
-            });
-            $.ajax({
-                type: "post",
-                url: "adminapi?type=newstudent",
-                data: JSON.stringify(data),
-                async: false,
-                contentType: "application/json; charset=utf-8",
-                success: function(response) {
-                    if (response == null) {
-                        $("#dialogaddstudent").dialog('close');
-                        alert("Lỗi không thêm được sinh viên!")
-                    } else {
-                    	$('.alert').fadeIn();
-                        $('.alert').fadeOut(5000);
-                        $("#dialogaddstudent").dialog('close');
-                    }
-
-                }
-            });
-        }
-        /**
-         * Hàm lưu dũ liệu sau khi người dùng thực hiện thêm mới hoặc sửa dữ liệu
-         */
     saveData() {
         var me = this;
         var data = {};
@@ -225,12 +184,11 @@ class teacher {
                         $("#dialogadd").dialog('close');
                         me.openDialogAlert();
                     } else if (response.message == "success") {
-                    	$('.alert').fadeIn();
-                        $('.alert').fadeOut(5000);
+                        $('.alert-add-success').fadeIn();
+                        $('.alert-add-success').fadeOut(5000);
                         $("#dialogadd").dialog('close');
                         me.loadData();
                     }
-
                 }
             });
         } else {
@@ -242,53 +200,39 @@ class teacher {
                 async: false,
                 contentType: "application/json; charset=utf-8",
                 success: function(response) {
+                    $('.alert-edit-success').fadeIn();
+                    $('.alert-edit-success').fadeOut(5000);
                     $("#dialogadd").dialog('close');
                     me.loadData();
                 }
             });
         }
-
-
-
     }
 
     /**
      * Hàm xóa dữ liệu khi ấn nút xóa
      */
     deleteData() {
-        var me = this;
-        var id = $('.tick td[fieldname="studentid"]').html();
-        $.ajax({
-            type: "delete",
-            url: "adminapi?studentid=" + id,
-            async: false,
-            contentType: "application/json; charset=utf-8",
-            success: function(response) {
-                $('.tick').closest("tr").remove();
-                me.closeDialogDelete();
-            }
-        });
-        event.preventDefault();
-    }
-
-    /**
-     * Hàm lấy giá trị ngày hiện tại và hiển thị trên giao diện
-     */
-    getDateNow() {
-        var date = new Date($.now());
-        var res = date.getMonth();
-        if (res == 12) {
-            res = 1;
-        } else {
-            res++;
+            var me = this;
+            var id = $('.tick td[fieldname="studentid"]').html();
+            $.ajax({
+                type: "delete",
+                url: "adminapi?studentid=" + id,
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                success: function(response) {
+                    $('.tick').closest("tr").remove();
+                    me.closeDialogDelete();
+                    $('.alert-delete-success').fadeIn();
+                    $('.alert-delete-success').fadeOut(5000);
+                }
+            });
+            event.preventDefault();
         }
-        $('#datenow').val(date.getDate() + '/' + res + '/' + date.getFullYear());
-
-    }
-
-    /**
-     * Hàm lấy dữ liệu danh sách điểm sinh viên với ứng mới giảng viên và môn học được chọn
-     */
+        /**
+         * Hàm lấy dữ liệu danh sách điểm sinh viên với ứng mới giảng viên và môn
+         * học được chọn
+         */
     getData() {
         var teacherid = $('#teacherid').val();
         var subjectid = $('#subject option:selected').val();
@@ -308,7 +252,8 @@ class teacher {
     }
 
     /**
-     * Hàm load dữ liệu tương ứng với teacherid và subjectid được lựa chọn trong thẻ select
+     * Hàm load dữ liệu tương ứng với teacherid và subjectid được lựa chọn trong
+     * thẻ select
      */
     loadData() {
         $('button.edit').prop("disable", true);
@@ -331,8 +276,6 @@ class teacher {
             });
             $('.table tbody').append(rowHTML);
         });
-
-
     }
 
     checkTickRow() {

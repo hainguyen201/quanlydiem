@@ -16,5 +16,8 @@
 	<decorator name="login" page="login.jsp">
 		<pattern>/*</pattern>
 	</decorator>
+	<decorator name="list" page="list.jsp">
+		<pattern>/list*</pattern>
+	</decorator>
 		
 </decorators>

@@ -1,0 +1,10 @@
+td[filedname="email"] {
+    width: 50px;
+}
+
+.content {
+    grid-template-columns: 0% 100%;
+}
+.content>div{
+	border-right:none;
+}

@@ -160,7 +160,7 @@ public class AbstractDAO<T> implements GenericDAO<T> {
 		}
 
 	}
-	public boolean delete(String sql, RowMapper<T> rowMapper, Object... parameters) {
+	public boolean update(String sql, RowMapper<T> rowMapper, Object... parameters) {
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		Connection connection = null;

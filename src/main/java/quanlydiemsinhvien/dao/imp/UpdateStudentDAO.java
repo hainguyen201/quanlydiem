@@ -26,7 +26,7 @@ public class UpdateStudentDAO extends AbstractDAO<StudentGradeModel> implements 
 	public void deleteStudentGrade(Long studentid) {
 		StringBuilder sql=new StringBuilder(" delete from grade \r\n" + 
 				"where studentid="+studentid);
-		delete(sql.toString(), new StudentGradeMapper());
+		update(sql.toString(), new StudentGradeMapper());
 		
 	}
 
@@ -35,7 +35,7 @@ public class UpdateStudentDAO extends AbstractDAO<StudentGradeModel> implements 
 	public void updateStudentGrade(StudentGradeModel studentGradeModel, Long studentid, String subjectid) {
 	   StringBuilder sql=new StringBuilder("update student set studentname=?,studentid=? where studentid=?");
 	   sql.append(" update grade set studentid=?,grade1=?, grade2=?, note=?, classid=?, semester=?, subjectid=? where studentid=? and subjectid=?");
-	   delete(sql.toString(), new StudentGradeMapper(), 
+	   update(sql.toString(), new StudentGradeMapper(), 
 			   studentGradeModel.getStudentname(),
 			   studentGradeModel.getStudentid(),
 			   studentid,
