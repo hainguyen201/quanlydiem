@@ -22,6 +22,8 @@
 	href="<c:url value='/template/CSS/studentinfo.css'/>">
 <link rel="stylesheet" type="text/css" media="all"
 	href="<c:url value='/template/CSS/table.css'/>">
+<link rel="stylesheet" type="text/css" media="all"
+	href="<c:url value='/template/CSS/list.css'/>">
 
 </head>
 <body>

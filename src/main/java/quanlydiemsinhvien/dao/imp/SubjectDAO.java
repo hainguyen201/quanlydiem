@@ -7,6 +7,9 @@ import quanlydiemsinhvien.mapper.SubjectMapper;
 import quanlydiemsinhvien.model.SubjectModel;
 
 public class SubjectDAO extends AbstractDAO<SubjectModel> implements ISubjectDAO{
+	/**
+	 * Hàm lấy toàn bộ môn học của một giáo viên
+	 */
 	@Override
 	public List<SubjectModel> getAllSubjectByTeacherid(Long teacherid) {
 		StringBuilder sql=new StringBuilder("select * from subject where teacherid=");

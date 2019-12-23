@@ -7,6 +7,9 @@ import quanlydiemsinhvien.mapper.TeacherGradeMapper;
 import quanlydiemsinhvien.model.TeacherGradeModel;
 
 public class TeacherGradeDAO extends AbstractDAO<TeacherGradeModel> implements ITeacherGradeDAO{
+	/**
+	 * Lấy thông tin điểm của một môn do giáo viên giảng dạy
+	 */
 	@Override
 	public List<TeacherGradeModel> findAllStudentGrade(String subjectid, Long teacherid) {
 		StringBuilder sql=new StringBuilder("select * from student s inner join grade g on s.studentid=g.studentid\r\n" + 

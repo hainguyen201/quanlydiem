@@ -7,7 +7,9 @@ import quanlydiemsinhvien.model.StudentModel;
 import quanlydiemsinhvien.model.SubjectModel;
 
 public class SubjectMapper implements RowMapper<SubjectModel>{
-
+	/**
+	 * Hàm map dữ liệu từ resultset vào Subject
+	 */
 	@Override
 	public SubjectModel mapRow(ResultSet resultSet) {
 		SubjectModel subject = new SubjectModel();

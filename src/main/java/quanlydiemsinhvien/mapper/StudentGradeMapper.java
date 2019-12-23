@@ -7,7 +7,9 @@ import quanlydiemsinhvien.model.StudentGradeModel;
 import quanlydiemsinhvien.model.StudentModel;
 
 public class StudentGradeMapper implements RowMapper<StudentGradeModel> {
-
+	/**
+	 * Hàm map dữ liệu từ resultset vào StudentGradeModel
+	 */
 	@Override
 	public StudentGradeModel mapRow(ResultSet resultSet) {
 		try {

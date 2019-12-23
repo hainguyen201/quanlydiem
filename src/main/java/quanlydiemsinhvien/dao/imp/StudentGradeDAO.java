@@ -7,7 +7,9 @@ import quanlydiemsinhvien.mapper.StudentGradeMapper;
 import quanlydiemsinhvien.model.StudentGradeModel;
 
 public class StudentGradeDAO extends AbstractDAO<StudentGradeModel> implements IStudentGradeDAO{
-
+	/**
+	 * Hàm lấy toàn bộ điểm của sinh viên
+	 */
 	@Override
 	public List<StudentGradeModel> getAllGradeByStudentId(Long studentid) {
 		String sql = "select semester, g.subjectid, sub.subjectname, sub.credit, g.classid, g.grade1, g.grade2 " + 

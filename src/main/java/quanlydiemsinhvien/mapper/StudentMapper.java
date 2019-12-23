@@ -5,7 +5,9 @@ import java.sql.SQLException;
 import quanlydiemsinhvien.model.StudentModel;
 
 public class StudentMapper implements RowMapper<StudentModel> {
-
+	/**
+	 * Hàm map dữ liệu từ resultset vào StudentModel
+	 */
 	@Override
 	public StudentModel mapRow(ResultSet resultSet) {
 		StudentModel student = new StudentModel();

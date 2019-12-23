@@ -9,12 +9,17 @@ import quanlydiemsinhvien.model.StudentGradeModel;
 import quanlydiemsinhvien.model.StudentModel;
 
 public class StudentDAO extends AbstractDAO<StudentModel> implements IStudentDAO {
+	/**
+	 * Lấy toàn bộ sinh viên trong bảng student
+	 */
 	@Override
 	public List<StudentModel> getAllStudent() {
 		String sql = "select * from student left join userrole on student.studentid =userrole.userid";
 		return query(sql, new StudentMapper());
 	}
-
+	/**
+	 * Hàm lấy thông tin sinh viên với tham số là username và password
+	 */
 	@Override
 	public StudentModel findbynameandpassword(String username, String password) {
 		StringBuilder sql = new StringBuilder("select * from student s inner join userrole r on"
@@ -29,7 +34,9 @@ public class StudentDAO extends AbstractDAO<StudentModel> implements IStudentDAO
 			return studentModels.get(0);
 		}
 	}
-
+	/**
+	 * Hàm lấy điểm sinh viên
+	 */
 	@Override
 	public List<StudentGradeModel> getStudentGradeById(Long studentid) {
 		StringBuilder sql = new StringBuilder("select * from student s inner join grade g on s.studentid=g.studentid");
@@ -37,20 +44,24 @@ public class StudentDAO extends AbstractDAO<StudentModel> implements IStudentDAO
 		sql.append(" where s.studentid=" + studentid);
 		return query(sql.toString(), new StudentGradeMapper());
 	}
-
+	/**
+	 * Hàm thêm sinh viên
+	 */
 	@Override
 	public StudentModel insertStudent(StudentModel studentModel) {
 		StringBuilder sql = new StringBuilder("");
 		if (studentModel.getDob() != null) {
-			sql.append(
-					"insert into student (studentid, studentname, email, faculty, district, dateofbirth, gender, studentclass)");
-			sql.append(" values (?,?,?,?,?,convert(date,?),?,?) ");
 			sql.append("insert into userrole (userid, username, password, roleid) ");
-			sql.append("values(?,?,?,2)");
-			return insertStudent(sql.toString(), studentModel.getStudentid(), studentModel.getStudentname(),
+			sql.append("values(?,?,?,2) ");
+			sql.append(
+					" insert into student (studentid, studentname, email, faculty, district, dateofbirth, gender, studentclass)");
+			sql.append(" values (?,?,?,?,?,convert(date,?),?,?) ");
+			
+			return insertStudent(sql.toString(),
+					studentModel.getStudentid(), studentModel.getStudentid(), studentModel.getStudentid(),
+					studentModel.getStudentid(), studentModel.getStudentname(),
 					studentModel.getEmail(), studentModel.getFaculty(), studentModel.getDistrict(),
-					studentModel.getDob(), studentModel.getGender(), studentModel.getStudentclass(),
-					studentModel.getStudentid(), studentModel.getStudentid(), studentModel.getStudentid());
+					studentModel.getDob(), studentModel.getGender(), studentModel.getStudentclass());
 		} else {
 			sql.append("insert into student (studentid, studentname, email, faculty, district, gender, studentclass)");
 			sql.append(" values (?,?,?,?,?,?,?) ");
@@ -62,7 +73,9 @@ public class StudentDAO extends AbstractDAO<StudentModel> implements IStudentDAO
 					studentModel.getStudentid(), studentModel.getStudentid());
 		}
 	}
-
+	/**
+	 * Hàm xóa sinh viên
+	 */
 	@Override
 	public boolean deleteStudent(Long studentid) {
 		StringBuilder sql = new StringBuilder("delete from student where studentid=" + studentid);
@@ -72,7 +85,9 @@ public class StudentDAO extends AbstractDAO<StudentModel> implements IStudentDAO
 			return true;
 		return false;
 	}
-
+	/**
+	 * Hàm cập nhật sinh viên
+	 */
 	@Override
 	public boolean updateStudent(StudentModel studentModel, Long studentid) {
 		StringBuilder sql = new StringBuilder("");

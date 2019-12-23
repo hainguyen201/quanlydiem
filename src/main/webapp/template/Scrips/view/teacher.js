@@ -35,7 +35,6 @@ class teacher extends base {
         $(document).on('click', 'button.dialegalert-cancel', this.closeDialogAlertAdd);
         $(document).on('click', 'button.add-student', this.openDialogAddStudentFirst.bind(this));
 
-
     }
 
     /**
@@ -185,9 +184,13 @@ class teacher extends base {
                         me.openDialogAlert();
                     } else if (response.message == "success") {
                         $('.alert-add-success').fadeIn();
-                        $('.alert-add-success').fadeOut(5000);
+                        $('.alert-add-success').fadeOut(2000);
                         $("#dialogadd").dialog('close');
                         me.loadData();
+                    } else {
+                    	$('#dialogadd').dialog('close');
+                        $('.alert-danger').fadeIn();
+                        $('.alert-danger').fadeOut(2000);       
                     }
                 }
             });
@@ -201,7 +204,7 @@ class teacher extends base {
                 contentType: "application/json; charset=utf-8",
                 success: function(response) {
                     $('.alert-edit-success').fadeIn();
-                    $('.alert-edit-success').fadeOut(5000);
+                    $('.alert-edit-success').fadeOut(2000);
                     $("#dialogadd").dialog('close');
                     me.loadData();
                 }
@@ -224,7 +227,7 @@ class teacher extends base {
                     $('.tick').closest("tr").remove();
                     me.closeDialogDelete();
                     $('.alert-delete-success').fadeIn();
-                    $('.alert-delete-success').fadeOut(5000);
+                    $('.alert-delete-success').fadeOut(2000);
                 }
             });
             event.preventDefault();

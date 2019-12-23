@@ -12,7 +12,6 @@ import quanlydiemsinhvien.model.StudentGradeModel;
 import quanlydiemsinhvien.model.StudentModel;
 import quanlydiemsinhvien.model.TeacherGradeModel;
 import quanlydiemsinhvien.model.TeacherModel;
-import quanlydiemsinhvien.service.IStudentService;
 import quanlydiemsinhvien.service.ITeacherService;
 
 public class TeacherService implements ITeacherService{

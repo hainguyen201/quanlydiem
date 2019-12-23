@@ -6,7 +6,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +16,10 @@ import quanlydiemsinhvien.model.StudentGradeModel;
 import quanlydiemsinhvien.model.StudentModel;
 
 public class AbstractDAO<T> implements GenericDAO<T> {
+	/**
+	 * Hàm kết nối tới cơ sở dữ liệu
+	 * @return
+	 */
 	public Connection getConnection() {
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -34,7 +37,9 @@ public class AbstractDAO<T> implements GenericDAO<T> {
 
 		return null;
 	}
-
+	/**
+	 * Hàm truy vấn dữ liệu
+	 */
 	@Override
 	public <T> List<T> query(String sql, RowMapper<T> rowMapper, Object... parameters) {
 		List<T> results = new ArrayList<>();
@@ -69,7 +74,12 @@ public class AbstractDAO<T> implements GenericDAO<T> {
 			}
 		}
 	}
-
+	/**
+	 * Hàm thêm sinh viên
+	 * @param sql
+	 * @param parameters
+	 * @return
+	 */
 	public StudentModel insertStudent(String sql, Object... parameters) {
 		StudentModel studentModel= new StudentModel();
 		PreparedStatement statement = null;
@@ -115,6 +125,12 @@ public class AbstractDAO<T> implements GenericDAO<T> {
 		}
 
 	}
+	/**
+	 * Hàm thêm điểm sinh viên
+	 * @param sql
+	 * @param parameters
+	 * @return
+	 */
 	public StudentGradeModel insert(String sql, Object... parameters) {
 		StudentGradeModel studentGradeModel= new StudentGradeModel();
 		PreparedStatement statement = null;
@@ -160,6 +176,13 @@ public class AbstractDAO<T> implements GenericDAO<T> {
 		}
 
 	}
+	/**
+	 * Hàm cập nhật điểm sinh viên
+	 * @param sql
+	 * @param rowMapper
+	 * @param parameters
+	 * @return
+	 */
 	public boolean update(String sql, RowMapper<T> rowMapper, Object... parameters) {
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
@@ -201,6 +224,11 @@ public class AbstractDAO<T> implements GenericDAO<T> {
 			}
 		}
 	}
+	/**
+	 * Hàm thay thế các tham số vào trong câu lệnh sql
+	 * @param statement
+	 * @param parameters
+	 */
 	private void setParameter(PreparedStatement statement, Object... parameters) {
 		try {
 			String s=statement.toString();

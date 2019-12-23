@@ -5,7 +5,9 @@ import java.sql.ResultSet;
 import quanlydiemsinhvien.model.TeacherModel;
 
 public class TeacherMapper implements RowMapper<TeacherModel>{
-
+	/**
+	 * Hàm map dữ liệu từ resultset vào TeacherModel
+	 */
 	@Override
 	public TeacherModel mapRow(ResultSet resultSet) {
 		try {

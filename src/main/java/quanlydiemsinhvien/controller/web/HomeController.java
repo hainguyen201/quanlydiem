@@ -65,6 +65,9 @@ public class HomeController extends HttpServlet {
 			} else if (usertype.equals("teacher")) {
 				RequestDispatcher rd = request.getRequestDispatcher("/admin-home");
 				rd.forward(request, response);
+			}else {
+				RequestDispatcher rd = request.getRequestDispatcher("/views/login.jsp");
+				rd.forward(request, response);
 			}
 		}
 	}

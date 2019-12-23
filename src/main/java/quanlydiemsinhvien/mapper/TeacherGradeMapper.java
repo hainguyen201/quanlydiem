@@ -6,7 +6,9 @@ import java.sql.SQLException;
 import quanlydiemsinhvien.model.TeacherGradeModel;
 
 public class TeacherGradeMapper implements RowMapper<TeacherGradeModel> {
-
+	/**
+	 * Hàm map dữ liệu từ resultset vào TeacherGradeModel
+	 */
 	@Override
 	public TeacherGradeModel mapRow(ResultSet resultSet) {
 		try {
