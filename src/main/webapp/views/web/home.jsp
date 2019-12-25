@@ -24,11 +24,11 @@
 				</div>
 				<div class="input-login-form">
 					<div class="label-input">
-						<span>Tai khoan</span>
+						<span>Tài khoản</span>
 					</div>
 					<input name="user" property="login" /><br> <br>
 					<div class="label-input">
-						<span>Mat khau</span>
+						<span>Mật khẩu</span>
 					</div>
 					<input name="password" type="password" property="login" /><br>
 				</div>

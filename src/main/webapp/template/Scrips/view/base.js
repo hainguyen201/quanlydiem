@@ -64,8 +64,8 @@ class base {
                         $('.alert-danger').fadeIn();
                         $('.alert-danger').fadeOut(5000);
                     } else if (response.message == "success") {
-                        $('.alert-add-success').fadeIn();
-                        $('.alert-add-success').fadeOut(5000);
+                        $('.alert-edit-success').fadeIn();
+                        $('.alert-edit-success').fadeOut(5000);
                         $("#dialogaddstudent").dialog('close');
                         me.loadData();
                     } else {
