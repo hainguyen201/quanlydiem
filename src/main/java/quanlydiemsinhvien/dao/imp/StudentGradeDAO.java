@@ -12,11 +12,10 @@ public class StudentGradeDAO extends AbstractDAO<StudentGradeModel> implements I
 	 */
 	@Override
 	public List<StudentGradeModel> getAllGradeByStudentId(Long studentid) {
-		String sql = "select semester, g.subjectid, sub.subjectname, sub.credit, g.classid, g.grade1, g.grade2 " + 
-				"from grade g, subject sub, student \r\n" + 
-				"where g.studentid=?\r\n" + 
-				"and g.subjectid=sub.subjectid\r\n" + 
-				"and student.studentid=g.studentid";
+		String sql = "select * from student s, grade g, teach\r\n" + 
+				"where s.studentid=g.studentid\r\n" + 
+				"and teach.classid=g.classid\r\n" + 
+				"and s.studentid=?";
 		return query(sql, new StudentGradeMapper(), studentid);
 	}
 

@@ -34,6 +34,7 @@ class teacher extends base {
         $(document).on('click', 'button.cancelstudent', this.closeDialogAddStudent);
         $(document).on('click', 'button.dialegalert-cancel', this.closeDialogAlertAdd);
         $(document).on('click', 'button.add-student', this.openDialogAddStudentFirst.bind(this));
+        $(document).on('click', 'button.btn-addsubject', this.openDialogAddSubject.bind(this));
 
     }
 
@@ -155,6 +156,10 @@ class teacher extends base {
         });
     }
 
+    /**
+     * Hàm mở dialog thêm môn học cho giảng viên
+     */
+
 
     /**
      * Hàm lưu dũ liệu sau khi người dùng thực hiện thêm mới hoặc sửa dữ
@@ -188,9 +193,9 @@ class teacher extends base {
                         $("#dialogadd").dialog('close');
                         me.loadData();
                     } else {
-                    	$('#dialogadd').dialog('close');
+                        $('#dialogadd').dialog('close');
                         $('.alert-danger').fadeIn();
-                        $('.alert-danger').fadeOut(2000);       
+                        $('.alert-danger').fadeOut(2000);
                     }
                 }
             });

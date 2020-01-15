@@ -23,7 +23,7 @@ public class AbstractDAO<T> implements GenericDAO<T> {
 	public Connection getConnection() {
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			String url = "jdbc:sqlserver://localhost:1433;databaseName=Quanlydiem;integratedSecurity=true;";
+			String url = "jdbc:sqlserver://localhost:1433;databaseName=Quanlydiem1;integratedSecurity=true;";
 			String user = "sa";
 			String password = "123";
 			return DriverManager.getConnection(url, user, password);

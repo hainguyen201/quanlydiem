@@ -92,7 +92,7 @@
 						<option value="${sub.getSubjectid()}">${sub.getSubjectname()}</option>
 					</c:forEach>
 				</select>
-
+				
 			</div>
 			<div class="content-right">
 				<div class="datenow">
@@ -111,6 +111,7 @@
 					<button class="add-new">Thêm</button>
 					<button class="edit" disabled>Sửa</button>
 					<button class="delete" disabled>Xóa</button>
+					<button class="btn-addsubject">Thêm MH</button>
 				</div>
 				<div id='dialogadd' hidden>
 					<form class="form-add">

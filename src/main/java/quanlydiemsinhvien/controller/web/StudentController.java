@@ -42,6 +42,9 @@ public class StudentController extends HttpServlet{
 		
 		
 	}
+	/**
+	 * Chuyển sang trang giao diện của sinh viên khi đăng nhập thành côngA
+	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("/views/web/home.jsp");

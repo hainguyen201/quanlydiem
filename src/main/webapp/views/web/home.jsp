@@ -101,6 +101,7 @@
 						</div>
 					</div>
 				</div>
+				<input id="search" type="text" placeholder="Search.." style="top: 52px">
 				<div class="main-table">
 					<table class="table table-hover table-bordered table-responsive-sm">
 						<thead>
@@ -115,7 +116,7 @@
 								<th fieldname="result">Kết quả</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="mytable">
 						</tbody>
 					</table>
 				</div>
