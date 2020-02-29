@@ -22,6 +22,7 @@ public class StudentMapper implements RowMapper<StudentModel> {
 			student.setStudentclass(resultSet.getString("studentclass"));
 			student.setFaculty(resultSet.getString("faculty"));
 			student.setRoleid(resultSet.getLong("roleid"));
+			student.setPhone(resultSet.getString("phone"));
 			student.setMessage("success");
 			return student;
 		} catch (SQLException e) {

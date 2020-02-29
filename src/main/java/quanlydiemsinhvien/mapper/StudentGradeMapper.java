@@ -21,6 +21,7 @@ public class StudentGradeMapper implements RowMapper<StudentGradeModel> {
 			studentgrade.setClassid(resultSet.getString("classid"));
 			studentgrade.setGrade1(resultSet.getFloat("grade1"));
 			studentgrade.setGrade2(resultSet.getFloat("grade2"));
+			studentgrade.setWeight(resultSet.getFloat("weight"));
 			return studentgrade;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -22,6 +22,9 @@ import quanlydiemsinhvien.utils.HttpUtil;
 
 @WebServlet(urlPatterns = { "/adminapi" })
 public class Teacherapi extends HttpServlet {
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 	@Inject
 	private ITeacherService teacherService;

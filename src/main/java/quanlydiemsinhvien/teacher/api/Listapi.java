@@ -18,12 +18,13 @@ import quanlydiemsinhvien.service.impl.StudentService;
 import quanlydiemsinhvien.utils.HttpUtil;
 @WebServlet(urlPatterns = "/listapi")
 public class Listapi extends HttpServlet{
+	/**
+	 * 
+	 */
 	@Inject 
 	private StudentService studentService;
 	private static final long serialVersionUID = 1L;
-	/**
-	 * Hàm lấy toàn bộ danh sách sinh viên
-	 */
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
@@ -35,9 +36,6 @@ public class Listapi extends HttpServlet{
 		mapper.writeValue(response.getOutputStream(), studentModels);
 		
 	}
-	/**
-	 * Hàm xóa sinh viên
-	 */
 	@Override
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
@@ -55,9 +53,6 @@ public class Listapi extends HttpServlet{
 			mapper.writeValue(response.getOutputStream(), studentGradeModel);
 		} 
 	}
-	/**
-	 * Hàm sửa thông tin sinh viên
-	 */
 	@Override
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ObjectMapper mapper = new ObjectMapper();

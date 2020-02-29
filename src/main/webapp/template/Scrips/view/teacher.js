@@ -37,6 +37,9 @@ class teacher extends base {
         $(document).on('click', 'button.btn-addsubject', this.openDialogAddSubject.bind(this));
 
     }
+    openDialogAddSubject() {
+
+    }
 
     /**
      * Hàm đóng dialog thêm và sửa
@@ -78,7 +81,7 @@ class teacher extends base {
         var date = new Date($.now());
         var month = date.getMonth();
 
-        if (month >= 8 || month <= 1) {
+        if (month >= 8 || month <= 2) {
             month = 1;
         } else {
             month = 2;

@@ -25,3 +25,15 @@
 .info div input {
     width: 250px;
 }
+
+.total {
+    position: relative;
+    top: 70px;
+    left: 40px;
+    font-size: 25px;
+}
+
+.total>div {
+    width: 200px;
+    background-color: #D0D2CF;
+}

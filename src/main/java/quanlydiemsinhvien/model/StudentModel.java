@@ -11,7 +11,15 @@ public class StudentModel extends AbstractModel{
 	private String studentclass;
 	private String dob;
 	private StudentGradeModel studentGradeModel;
+	private String phone;
 	
+	
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 	public String getDob() {
 		return dob;
 	}

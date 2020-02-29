@@ -9,7 +9,14 @@ public class StudentGradeModel extends AbstractModel{
 	private float grade1;
 	private float grade2;
 	private String note;
+	private float weight;
 	
+	public float getWeight() {
+		return weight;
+	}
+	public void setWeight(float weight) {
+		this.weight = weight;
+	}
 	public String getNote() {
 		return note;
 	}

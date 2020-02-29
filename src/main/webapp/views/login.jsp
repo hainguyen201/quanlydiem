@@ -13,7 +13,7 @@
 			<a href="#" class="logo_uni_header"></a>
 		</div>
 		<div class="login">
-			<button class="link-login">Đăng nhập</button>
+			<button class="link-login">Dang nhap</button>
 		</div>
 		<!-- <div class="login-form">
                 <form action="" method="">
@@ -49,16 +49,16 @@
 			<form action="/quanlydiemsinhvien/dang-nhap?action=login"
 				method="post" class="login-form">
 				<div class="login-title">
-					<span style="display: inline-block;width: 100px;">Đăng nhập</span>
+					<span>Login</span>
 				</div>
 				<div class="input-login-form">
 					<div class="label-input">
-						<span>Tài khoản</span>
+						<span>Tai khoan</span>
 					</div>
 					<input name="username" property="login" /><br>
 					<br>
 					<div class="label-input">
-						<span>Mật khẩu</span>
+						<span>Mat khau</span>
 					</div>
 					<input name="password" type="password" property="login" /><br>
 					<input name="usertype" id="usertype" value="" type="hidden"/>
@@ -66,7 +66,7 @@
 				<div class="login-type">
 					<input type="radio" name="type" id="teacher" value="teacher" /><label
 						for="teacher">Giáo viên</label> <input type="radio" name="type"
-						id="student" value="student" /><label for="student">Học sinh</label>
+						id="student" value="student" /><label for="student">Phụ huynh</label>
 				</div>
 				<button style="margin-left: 40px;" class="btn-login">Đăng nhập</button>
 			</form>
